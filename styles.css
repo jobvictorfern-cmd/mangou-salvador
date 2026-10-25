@@ -24,14 +24,17 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
 .skip-link:focus{top:12px}
 .top-note{display:flex;justify-content:center;gap:24px;padding:8px 20px;background:var(--green);color:var(--paper);font-size:10px;font-weight:650;letter-spacing:.04em}
 .top-note span:last-child{display:none}
-.site-header{position:sticky;top:0;z-index:30;background:transparent}
+.site-header{position:sticky;top:0;z-index:30;margin-bottom:-72px;background:transparent;color:var(--paper)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;min-height:72px}
 .brand{display:inline-flex;align-items:center;gap:8px}
 .brand img{width:40px;height:40px;border-radius:50%}
 .brand>span{font:850 31px/1 var(--display);letter-spacing:-2px}
 .brand-dot{color:#a66b00}
+.site-header .brand-dot{color:var(--yellow)}
 .menu-toggle{display:flex;flex-direction:column;justify-content:center;gap:7px;width:44px;height:44px;padding:11px;border:1px solid var(--green);border-radius:4px;background:transparent}
 .menu-toggle span{width:20px;height:2px;background:var(--green);transition:transform .2s}
+.hero .menu-toggle{border-color:var(--paper)}
+.hero .menu-toggle span{background:var(--paper)}
 .menu-toggle[aria-expanded=true] span:first-child{transform:translateY(4.5px) rotate(45deg)}
 .menu-toggle[aria-expanded=true] span:last-child{transform:translateY(-4.5px) rotate(-45deg)}
 .site-nav{display:flex;flex-direction:column;flex-basis:100%;gap:6px;padding:16px 0 22px}
@@ -39,10 +42,11 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
 .site-nav .button{margin-top:6px}
 .js .site-nav{position:absolute;top:100%;left:0;right:0;display:none;padding:16px var(--gutter) 24px;background:var(--paper);border-bottom:2px solid var(--green)}
 .js .site-nav.is-open{display:flex}
+.js .site-header .site-nav.is-open>a:not(.button){color:var(--green)}
 
 /* A campanha usa a frase do rótulo e a fotografia original, sem redesenhar o produto. */
 .hero{position:relative;isolation:isolate;overflow:clip;background:var(--green);color:var(--paper)}
-.hero-layout{position:relative;z-index:1;display:grid;gap:18px;padding-block:28px 0}
+.hero-layout{position:relative;z-index:1;display:grid;gap:18px;padding-block:100px 0}
 .hero-heading{grid-row:1;position:relative;z-index:1}
 .hero-intro{margin-bottom:13px;font-size:13px;font-weight:650}
 .hero h1{font:850 1em/.94 var(--display);letter-spacing:-.06em}
@@ -168,7 +172,7 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
 @media(min-width:600px){
   :root{--gutter:32px}
   .section{padding-block:76px}
-  .hero-layout{max-width:680px;padding-block:42px 0;gap:24px}
+  .hero-layout{max-width:680px;padding-block:114px 0;gap:24px}
   .hero-question{font-size:58px}
   .hero-answer{font-size:118px}
   .hero-product{height:430px}
@@ -188,6 +192,7 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
   :root{--gutter:40px}
   .top-note{justify-content:space-between;padding-inline:var(--gutter)}
   .top-note span:last-child{display:inline}
+  .site-header{margin-bottom:-88px}
   .header-inner{min-height:88px;flex-wrap:nowrap;gap:30px}
   .brand img{width:48px;height:48px}
   .brand>span{font-size:37px}
@@ -195,12 +200,12 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
   .js .site-nav,.site-nav{position:static;display:flex;flex-direction:row;align-items:center;flex-basis:auto;gap:26px;padding:0;border:0;background:transparent}
   .site-nav>a:not(.button){font-size:13px}
   .site-nav .button{min-height:44px;margin:0;padding:13px 17px;font-size:12px}
-  .hero-layout{max-width:1240px;min-height:710px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto;align-content:center;column-gap:54px;row-gap:28px;padding-block:72px 64px}
+  .hero-layout{max-width:1240px;min-height:798px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto;align-content:center;column-gap:54px;row-gap:28px;padding-block:160px 64px}
   .hero-heading{grid-column:1;grid-row:1;align-self:end}
   .hero-intro{font-size:16px;margin-bottom:18px}
   .hero-question{font-size:clamp(54px,5.2vw,76px)}
   .hero-answer{font-size:clamp(96px,9.2vw,134px)}
-  .hero-product{position:absolute;top:42px;right:-190px;width:740px;height:920px;margin:0;overflow:visible}
+  .hero-product{position:absolute;top:130px;right:-190px;width:740px;height:920px;margin:0;overflow:visible}
   .hero-product{perspective-origin:30% 34%}
   .hero-product-motion{top:0;bottom:auto;left:-140px;right:140px;height:620px}
   .mango-strand:nth-child(n+15){display:block}

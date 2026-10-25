@@ -301,8 +301,8 @@ Publicação verificada: commit `4d4701ae77d686ba92ddf3d710fe5b5bd3ebcf55`; GitH
 
 ## 20. Header transparente
 
-Plano: retirar a cor de fundo, a textura de papel e o divisor inferior do header sticky; manter sua altura, posição, navegação e comportamento responsivo. Assim, o conteúdo que passa atrás do header durante a rolagem fica visível sem alterar o grid do hero ou o menu.
+Plano: retirar a cor de fundo, a textura de papel e o divisor inferior do header sticky; manter sua altura, navegação e comportamento responsivo, sobrepondo-o ao fundo verde do hero para que a transparência seja visível. Ajustar o contraste da marca e dos controles sem alterar textos.
 
 Implementação: `styles.css` deixa `.site-header` transparente e remove apenas esse elemento da aplicação de textura. Altura, `position: sticky`, links e menu permanecem intactos. `index.html` aponta para CSS v28 para invalidar o cache.
 
-Publicação verificada: commit `03e8185` e GitHub Pages `40233517747` concluído com sucesso. HTML público referencia CSS v28; o CSS remoto confirma fundo transparente, header sem divisor e sem textura.
+Primeira alteração: commit `03e8185` e GitHub Pages `40233517747` concluído com sucesso. A captura enviada mostrou que o fundo do body ainda aparecia no espaço do header. Revisão implementada: o header agora é filho sticky do hero, sem fundo/textura/filete, com marca, menu e links em cores de contraste. A altura do header é compensada no fluxo e o início do conteúdo do hero preservado nos breakpoints móvel e desktop; CSS v29.
