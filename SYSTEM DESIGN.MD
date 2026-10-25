@@ -29,34 +29,60 @@ Conversão pretendida: abrir o cardápio, consultar o Instagram e traçar uma ro
 | Etapa | Entrega | Critério para concluir | Estado |
 | --- | --- | --- | --- |
 | 0. Documento inicial | Este arquivo, objetivo, escopo e sequência | Documento salvo antes de alterar HTML, CSS ou JS | Concluída |
-| 1. Pesquisa e direção visual | Perfil, referências de sites, seleção de fotos e paleta | Fontes registradas, ativos selecionados e direção definida neste documento | Em andamento |
-| 2. Estrutura e conteúdo | HTML completo e fluxos de navegação | Conteúdo curto, ações reais, sem informação comercial presumida | Pendente |
-| 3. Design e interações | CSS mobile first e JS necessário | Layout completo no celular e desktop, componentes operacionais | Pendente |
-| 4. Validação | Conferência visual, interações, mídia e acessibilidade | Verificações executadas e resultados/limites registrados | Pendente |
-| 5. Publicação | Commit, push e GitHub Pages | Deploy concluído e versão pública conferida | Pendente |
+| 1. Pesquisa e direção visual | Perfil, referências de sites, seleção de fotos e paleta | Fontes registradas, ativos selecionados e direção definida neste documento | Concluída |
+| 2. Estrutura e conteúdo | HTML completo e fluxos de navegação | Conteúdo curto, ações reais, sem informação comercial presumida | Concluída |
+| 3. Design e interações | CSS mobile first e JS necessário | Layout completo no celular e desktop, componentes operacionais | Concluída |
+| 4. Validação | Conferência visual, interações, mídia e acessibilidade | Verificações executadas e resultados/limites registrados | Concluída |
+| 5. Publicação | Commit, push e GitHub Pages | Deploy concluído e versão pública conferida | Em andamento |
 
 Cada etapa atualiza este documento antes da seguinte. Uma falha observada deve ser corrigida ou registrada como limitação; uma etapa não será marcada como concluída apenas porque o código foi escrito.
 
-## 4. Direção visual — a fechar na etapa 1
+## 4. Direção visual definida
 
 Ponto de partida: marca de comida de rua da Barra, fresca e informal. Usar fotografia com contexto real, tipografia expressiva e poucos elementos visuais com função clara. Evitar blocos genéricos de vantagens, selos sem fundamento, ícones repetidos e efeitos decorativos contínuos que disputem atenção com o produto.
 
-O sistema visual deve registrar, depois da pesquisa:
+Conceito: um cartaz de rua da Mangou levado para a web. Fundo de papel claro, tipografia verde grande, amarelo concentrado no cardápio, fotografias com enquadramento próprio e xadrez em faixas curtas. A direção substitui o fundo escuro fotográfico da versão anterior; preserva a identidade da marca sem copiar a composição de outro site.
 
-- Cores e respectivos usos: fundo principal, superfícies de leitura, chamadas e contraste.
-- Tipografia: títulos, corpo e rótulos, com tamanhos adequados a telas pequenas.
-- Espaçamento, largura de leitura, bordas e proporções das fotografias.
-- Componentes: cabeçalho, navegação móvel, botões, seleção de sabores, mídia e localização.
-- Estados: foco, hover, seleção, menu aberto, mídia pausada e movimento reduzido.
+### Tokens
 
-## 5. Estrutura proposta — sujeita à pesquisa
+| Token | Valor | Uso |
+| --- | --- | --- |
+| `--green` | `#123c29` | Marca, títulos, botões e localização |
+| `--yellow` | `#f6cc37` | Cardápio e chamadas sobre o verde |
+| `--paper` | `#fcf8e9` | Fundo principal e leitura |
+| `--white` | `#fffdf5` | Molduras e detalhes |
+| `--muted` | `#576656` | Texto secundário sobre fundo claro |
+| `--line` | `#123c2933` | Separações discretas |
+
+Paleta interpretada das cores recorrentes do perfil e do logo já existente; não se trata de um manual de marca oficial fornecido pela empresa.
+
+- Títulos: Bricolage Grotesque local, peso 800–850, entrelinha curta e tamanhos fluidos.
+- Corpo: DM Sans local, base 16 px e entrelinha de pelo menos 1,5.
+- Escala de espaçamento: 4, 8, 12, 16, 24, 32, 48, 64 e 96 px.
+- Conteúdo: largura máxima de 1240 px; margens de 20 px no celular, ampliadas progressivamente.
+- Fotografias: bordas de papel e pequenas inclinações em pontos específicos; sem filtro que altere o alimento.
+- Botões: área de toque de pelo menos 48 px, borda definida e contraste forte. Sem botões flutuantes cobrindo conteúdo.
+- Foco: contorno visível de alto contraste. Movimento: somente entrada curta e estados de interação; sem chuva de elementos ou animação contínua na LP reconstruída.
+
+### Componentes
+
+| Componente | Solução | Estados importantes |
+| --- | --- | --- |
+| Cabeçalho | Marca, três âncoras e Instagram | Menu móvel fechado/aberto, Escape, retorno de foco |
+| Hero | Título curto, foto real, sabores e localização | Imagem carregada; entrada desativada com movimento reduzido |
+| Cardápio | Seis elementos `details` com ingredientes | Primeiro aberto; abertura pelo toque e teclado; uso sem JS |
+| Galeria | Fotos/capas reais ligadas aos Reels originais | Links com nome acessível, rolagem horizontal interna no celular |
+| Filme do produto | Abertura voluntária em `dialog`, com vídeo nativo | Abrir, reproduzir, pausar, fechar e devolver foco |
+| Localização | Foto do Farol, Maps, Waze e Instagram | Sem afirmar ponto ou horário exato não confirmado |
+
+## 5. Estrutura final para implementação
 
 1. Cabeçalho compacto: marca, navegação e acesso claro ao Instagram.
-2. Hero: produto reconhecível, uma mensagem curta e ações para sabores e localização.
-3. Sabores: seis opções com ingredientes conhecidos e interação simples para explorar.
-4. Experiência real: fotografia e/ou vídeo do preparo, sem texto repetido.
-5. Localização e atendimento: Barra, rotas e confirmação dos horários nos Stories.
-6. Fechamento: chamada objetiva para visitar o perfil e rodapé com fontes.
+2. Hero: “Deu praia. Deu Mangou.”, foto real do copo e ações “Escolher meu sabor” e “Onde encontrar”.
+3. Sabores: cardápio amarelo com seis opções, ingredientes em disclosure e acesso ao perfil para preços/disponibilidade.
+4. O rolê: três fotografias/capas reais, links para os Reels correspondentes e botão para o filme de produto existente.
+5. Localização e atendimento: “O encontro é na Barra.”, foto do Farol, rotas e confirmação de ponto/horário no Instagram.
+6. Rodapé: marca, navegação e fontes. Sem outro bloco repetindo a apresentação.
 
 Evitar solicitar pedido ou pagamento se não existe fluxo real para isso. Não inserir formulário, checkout, conta ou backend.
 
@@ -68,6 +94,7 @@ Evitar solicitar pedido ou pagamento se não existe fluxo real para isso. Não i
 - `assets/`: fotos, marca, fontes e mídia servidas localmente.
 - `SYSTEM DESIGN.MD`: decisões, fontes, etapas e evidências de validação.
 - `README.md`: instruções operacionais e manutenção da versão final.
+- `checks/site.mjs`: verificação estrutural em Node.js, sem dependências nem participação na carga da LP.
 
 As páginas e fontes da prévia 3D anterior não precisam ser apagadas para refazer a landing page; permanecem separadas da página principal. A decisão sobre arquivos novos ou substituídos será registrada ao implementar.
 
@@ -89,7 +116,20 @@ As páginas e fontes da prévia 3D anterior não precisam ser apagadas para refa
 
 - Instagram oficial: https://www.instagram.com/mangou.salvador/
 - Publicação já usada no projeto para fotografia do produto: https://www.instagram.com/mangou.salvador/p/Ddr6zo-EYwB/
-- A relação dos novos materiais e seus usos será preenchida na etapa 1.
+- A bio e a grade pública foram acessadas novamente em 25/10/2026. Ao abrir publicações completas, o Instagram solicitou login. Não houve tentativa de contornar esse bloqueio nem coleta de conteúdo privado.
+
+| Arquivo | Origem pública observada | Uso |
+| --- | --- | --- |
+| `assets/manga.webp` | https://www.instagram.com/mangou.salvador/p/Ddr6zo-EYwB/ | Hero; fotografia real já preservada no projeto |
+| `assets/role-barra.jpg` | https://www.instagram.com/mangou.salvador/reel/Dcg7NSwpMDw/ | Capa do Reel com duas pessoas na orla |
+| `assets/role-resenha.jpg` | https://www.instagram.com/esthervasconcelos2001/reel/DdM_B7ihvQf/ | Capa de publicação colaborativa, pessoa experimentando o produto |
+| `assets/role-manga.jpg` | https://www.instagram.com/es.sancho/reel/DdMwPkLJcX_/ | Fotografia/capa do produto com a orla ao fundo |
+| `assets/role-preparo.jpg` | https://www.instagram.com/conhecendosalvador_/reel/Dct_3Nshrob/ | Capa da publicação sobre o preparo |
+| `assets/logo.webp` | Marca já existente no projeto, compatível com o perfil conferido | Identidade |
+| `assets/farol-barra.webp` | Wikimedia, crédito mantido no README/rodapé | Referência de localização |
+| `assets/mangou-hero-4k.mp4` | Arquivo anteriormente enviado/aprovado pelo usuário | Filme do produto, aberto voluntariamente |
+
+As novas capas foram baixadas das URLs de imagem presentes no DOM público da grade. A resolução disponível é 360 × 640; por isso entram em formatos pequenos, não como hero ampliado. Os Reels completos não foram baixados: a galeria leva às publicações originais. O filme local existente permanece independente desses Reels. Não apresentar uma capa como se fosse um vídeo local novo.
 
 ### Pesquisa de design iniciada
 
@@ -97,7 +137,7 @@ As páginas e fontes da prévia 3D anterior não precisam ser apagadas para refa
 - Fishwife: https://eatfishwife.com/
 - Tacombi: https://www.tacombi.com/
 
-Esses sites são referências de composição e navegação a inspecionar. Não reutilizar fotos, textos, ilustrações ou identidade dessas marcas.
+Ma‘ono: título forte, fotografia próxima do alimento e navegação curta. Fishwife: linguagem de embalagem, contornos e cores expressivas; evitar importar a complexidade de loja ou o popup comercial. Tacombi: hierarquia entre produto, cardápio e localização. Foram acessadas páginas oficiais; Ma‘ono e Fishwife também foram inspecionados visualmente no navegador. Não reutilizar fotos, textos, ilustrações ou identidade dessas marcas.
 
 ## 9. Validação e publicação
 
@@ -115,3 +155,40 @@ Testes no navegador não equivalem a teste em aparelho físico ou a um experimen
 ## 10. Registro de execução
 
 - 25/10/2026 — Etapa 0: documento criado antes da implementação. Repositório sincronizado e sem alterações locais no início. Perfil oficial acessado; pesquisa visual em andamento.
+- 25/10/2026 — Etapa 1: grade e bio verificadas; quatro capas/fotografias reais coletadas; referências oficiais consultadas; paleta, componentes e estrutura definidos. Limitação de acesso a publicações completas registrada. Nenhum HTML, CSS ou JS alterado até concluir esta etapa.
+- 25/10/2026 — Etapa 2: HTML reconstruído com hero, seis sabores, galeria de três publicações, localização e créditos. Ingredientes em `details`, vídeo em `dialog` e alternativas sem JS. Não há popup de cadastro, checkout, métricas inventadas ou botão flutuante. CSS e JavaScript da nova estrutura ainda em implementação; etapa visual não considerada concluída.
+- 25/10/2026 — Etapa 3: CSS refeito com tokens, base de uma coluna, cardápio amarelo, fotografia em moldura, xadrez e composição desktop a partir de 960 px. No celular, a ação principal foi posicionada antes da fotografia: em 390 × 844 px, seu topo ficou em aproximadamente 292 px, visível na primeira tela. Menu, vídeo em diálogo e configuração opcional do WhatsApp implementados em JS puro. Ingredientes e créditos usam controles HTML nativos. Sem animação contínua, bibliotecas ou dependências novas.
+- 25/10/2026 — Início da etapa 4: enquadramento conferido no navegador. A primeira passagem encontrou o título alguns pixels além da coluna desktop; a escala foi reduzida para corrigir esse limite antes da rodada final. Vídeo permanece sem atributo `src` até a abertura voluntária.
+- 25/10/2026 — Etapa 4 concluída: verificações estruturais, contraste dos tokens, 11 larguras, navegação, ingredientes, mídia e revisão visual realizadas. Fechamento rápido do filme também conferido: diálogo fechado, vídeo pausado, rolagem liberada e foco no acionador. README atualizado para a nova manutenção. Resultados e limites na seção 12. Publicação iniciada após essas verificações.
+
+## 11. Decisões de implementação
+
+- O CSS usa as próprias fontes locais existentes e não consulta Google Fonts durante a visita.
+- O CTA vem antes da foto no layout móvel; a ordem de leitura do HTML continua produto → descrição → ações. No desktop, texto e ações ficam à esquerda da fotografia.
+- O cardápio usa `details name="sabores"`; o navegador controla a expansão e oferece teclado sem código adicional. O comportamento continua útil em navegadores que permitem mais de um item aberto.
+- O `dialog` usa os controles nativos do vídeo. Ao fechar, a reprodução pausa e o foco retorna ao botão de abertura. Escape e clique no fundo também fecham o diálogo.
+- A pausa também ocorre diretamente no acionamento de fechar e no evento de Escape, antes do evento assíncrono `close`, para cobrir fechamento rápido enquanto a mídia ainda está carregando.
+- O MP4 só ganha uma URL de fonte depois do clique. O download de 18,8 MB não faz parte da carga inicial. O link direto continua disponível como alternativa quando JS/dialog não estão disponíveis.
+- Capas do Instagram são imagens locais. Não há iframe de Instagram, SDK de rede social, mapa incorporado, analytics ou rastreadores novos.
+- A localização usa fotografia do Farol e links de rota, em lugar do iframe de mapa da versão anterior.
+- A prévia 3D anterior e seus ativos foram preservados; a nova LP não os carrega.
+
+## 12. Resultados da etapa 4
+
+| Verificação executada | Resultado |
+| --- | --- |
+| Estrutura e sintaxe: `node checks/site.mjs` | Passou: 41 referências locais, IDs únicos, relações ARIA, imagens com dimensões/alt, seis sabores e sintaxe JS |
+| Larguras 320, 360, 390, 430, 600, 800, 959, 960, 1024, 1440 e 1885 px | Sem rolagem horizontal; título dentro da coluna em todas as larguras após o ajuste |
+| Foto principal | Carregada em todas as larguras verificadas |
+| Demais imagens | Sete imagens da página carregadas e decodificadas no navegador |
+| Menu móvel | Abre, fecha com Escape, devolve foco ao botão e fecha ao seguir uma âncora |
+| Cardápio | As seis receitas conferidas; abertura por clique e teclado; Dengo não recebe ingredientes presumidos |
+| Filme | Fonte ausente antes do clique; abertura voluntária; reprodução dos 8 segundos completos, sem erro de mídia |
+| Fechamento do diálogo | Escape fecha, pausa vídeo, libera rolagem e devolve foco ao acionador |
+| JavaScript no navegador | Nenhum erro de console registrado na rodada de interação |
+| Contraste calculado das cores-base | Verde/papel 11,59:1; verde/amarelo 7,99:1; secundário/papel 5,74:1 |
+| MP4 4K preservado | Hash Git do arquivo local igual ao ativo anterior; nenhuma recompressão |
+
+Os resultados de contraste cobrem esses pares de cores, não constituem auditoria completa de acessibilidade. A validação visual foi feita no navegador com viewports ajustados; não foi realizada em aparelho físico. A alternativa sem JavaScript foi conferida estruturalmente, sem uma sessão de navegador com JS desativado. Não há experimento A/B, analytics novo ou conversão medida.
+
+Evidências locais: `verificacao/mangou-redesign/` na pasta de trabalho acima do repositório, incluindo pesquisa de mídia e resultados responsivos. Essas evidências não são dependências da página publicada.
