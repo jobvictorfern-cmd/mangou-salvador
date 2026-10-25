@@ -20,7 +20,7 @@ Abra `index.html` no navegador ou sirva a raiz do repositório com qualquer serv
 
 ## Decisões de conteúdo e conversão
 
-O hero apresenta uma montagem 3D procedural do copo com manga, tempero, limão e tampa. A cena aparece diretamente sobre o verde da página, sem painel, legenda ou barra de progresso. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile e as abas de sabores são operacionais. Os textos foram reduzidos e a seção de perguntas frequentes foi removida para evitar repetição. Não há checkout, envio de pedidos ou formulário com armazenamento.
+O hero apresenta a fotografia real do copo cheio, com uma entrada suave que respeita a preferência por movimento reduzido. No celular, a foto fica logo abaixo do título; no desktop, o produto ocupa a direita e um gradiente preserva o contraste do texto à esquerda. O vídeo de preparo fica na seção “A experiência”, com reprodução iniciada pelo visitante. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile e as abas de sabores são operacionais. Os textos foram reduzidos e a seção de perguntas frequentes foi removida para evitar repetição. Não há checkout, envio de pedidos ou formulário com armazenamento.
 
 O material usa as cores verde e amarelo da marca. Não inclui depoimentos inventados, contadores, selos comerciais, preços desatualizados, telefone não confirmado ou horário fixo. A comunicação de atendimento direciona aos Stories. Melhorar a conversão é um objetivo do projeto, não um resultado medido ou garantido.
 
@@ -28,7 +28,7 @@ O cardápio apresenta seis sabores informados pelo responsável: Não tem erro (
 
 ## Layout mobile first
 
-O CSS base atende telas a partir de 320 px em uma coluna, com áreas de toque de pelo menos 44 px nos controles principais. Até 800 px, as etapas e os sabores ficam em uma coluna; as abas de sabores aparecem antes da fotografia. A navegação de desktop entra a partir de 801 px. O título inicial usa duas linhas no celular, a cena 3D tem enquadramento próprio e os botões principais têm pelo menos 52 px de altura. A chamada flutuante “Bora de Mangou” foi removida para não cobrir o conteúdo. O MP4 anterior está preservado em `assets`, mas não é carregado pela página. A cena atual usa a biblioteca local e geometrias geradas por código, sem downloads de modelos externos.
+O CSS base atende telas a partir de 320 px em uma coluna, com áreas de toque de pelo menos 44 px nos controles principais. Até 800 px, as etapas e os sabores ficam em uma coluna; as abas de sabores aparecem antes da fotografia. A navegação de desktop entra a partir de 801 px. O título inicial usa duas linhas no celular, a foto tem enquadramento próprio e os botões principais têm pelo menos 52 px de altura. A chamada flutuante “Bora de Mangou” foi removida para não cobrir o conteúdo. A foto do hero tem prioridade de carregamento; o MP4 usa `preload="none"`, sem reprodução automática. A página principal não carrega a biblioteca ou os módulos da montagem 3D.
 
 ## Fontes
 
@@ -59,7 +59,15 @@ O arquivo `assets/mango-strips-real.webp` é uma imagem gerada com a ferramenta 
 
 Os fundos da faixa de sabores, da localização e da chamada final receberam granulação de papel e fibras sutis. O ativo local `assets/paper-grain.svg` utiliza ruído estático reproduzível e mistura suave com as cores existentes. O padrão xadrez aparece em uma faixa estreita na base da seção de localização. A referência é o post da Mangou fornecido pelo usuário. Textos e botões permanecem em camadas de leitura separadas do padrão.
 
-## Montagem 3D do copo
+## Foto no hero e vídeo de preparo
+
+A página abre sempre com `assets/manga.webp`, a fotografia real do copo cheio na mão. A entrada da imagem dura 650 ms, acontece uma vez e é desativada quando o navegador prefere movimento reduzido. Links antigos com o parâmetro `hero` continuam abrindo a página com a fotografia.
+
+O vídeo fica depois das três etapas da seção “A experiência”. Usa o arquivo existente `assets/mangou-hero-4k.mp4` sem nova conversão ou recompressão: 3840 × 2160, 24 fps, 8 segundos. O primeiro quadro permanece em `assets/mangou-hero-poster-4k-mp4.webp`. A exibição é integral em 16:9 em todas as telas, com `controls muted playsinline preload="none"`. O visitante inicia a reprodução e pode ativar o áudio original nos controles nativos.
+
+## Prévia 3D separada
+
+A montagem anterior permanece disponível em `animacao-3d.html`, independente da página principal.
 
 O copo é uma malha de revolução com paredes de PET, borda, frisos e tampa abobadada. O logo original é aplicado em uma superfície curva. A manga usa 330 instâncias de uma geometria fina e curva, com variações de cor, mapa de superfície extraído do recorte macro e relevo de fibras. Um volume interno texturizado dá densidade ao preenchimento; pequenas gotas e microvariações no PET refinam o acabamento. O movimento é coreografado, sem motor de colisões: entrada do copo, queda da manga, tempero e limão, encaixe da tampa e rotação final suave.
 

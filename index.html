@@ -12,10 +12,8 @@
   <title>Mangou Salvador • Manga fresca, sabor que vicia</title>
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preload" href="assets/display-v2.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=14">
-  <link rel="stylesheet" href="cup-3d.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=15">
   <script src="script.js?v=14" defer></script>
-  <script type="module" src="cup-3d.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#principal">Pular para o conteúdo</a>
@@ -31,18 +29,11 @@
     </div>
   </header>
   <main id="principal">
-    <section class="hero hero-full hero--3d" id="inicio" aria-labelledby="hero-title">
-      <div class="hero-background"><img src="assets/manga.webp" alt="Copo Mangou com manga fresca e limão, na mão, em meio ao verde" width="1200" height="1600" fetchpriority="low"></div>
+    <section class="hero hero-full" id="inicio" aria-labelledby="hero-title">
       <div class="container hero-inner"><div class="hero-copy">
         
         <h1 id="hero-title">Seu rolê<br class="hero-break-desktop"> pede<br class="hero-break-mobile"> um<br class="hero-break-desktop"> <span class="highlight">Mangou</span><span class="hero-dot">.</span></h1>
-        <div class="hero-3d-media cup-stage" data-mangou-3d data-state="loading" role="group" aria-label="Montagem do copo Mangou em 3D">
-          <div class="cup-fallback" role="img" aria-label="Copo Mangou com manga fresca"></div>
-          <canvas class="cup-canvas" role="img" aria-label="Copo transparente em 3D recebe tiras de manga, limão e tempero; a tampa se encaixa ao final"></canvas>
-          <span class="cup-stage-status" data-cup-status aria-live="polite">Preparando seu Mangou…</span>
-          <button class="cup-a11y-pause" type="button" data-cup-toggle aria-pressed="false">Pausar montagem do copo</button>
-          <noscript><span class="cup-noscript">Manga fresca. Do seu jeito.</span></noscript>
-        </div>
+        <div class="hero-photo"><img src="assets/manga.webp" alt="Copo cheio de manga fresca da Mangou, na mão, em meio ao verde" width="1200" height="1600" fetchpriority="high" decoding="async"></div>
         <p class="hero-description">Manga fresca, limão e tempero. Seu rolê na Barra com mais sabor.</p>
         <div class="hero-actions"><a class="button" href="#sabores">Quero experimentar </a><a class="text-link" href="#onde">Encontrar a Mangou </a></div>
         <div class="hero-footnote"><span>Barra, Salvador <span class="dot-separator">•</span> Sábados e domingos</span></div>
@@ -59,6 +50,10 @@
         <article><span class="step-number">02 </span><h3>Escolha o tempero</h3><p>Clássico, defumado ou picante.</p></article>
         <article><span class="step-number">03 </span><h3>Partiu resenha</h3><p>Seu copo pronto para curtir a orla.</p></article>
       </div>
+      <figure class="preparation-video">
+        <video id="preparation-video" width="3840" height="2160" controls muted playsinline preload="none" poster="assets/mangou-hero-poster-4k-mp4.webp" aria-label="Preparo do Mangou com manga desfiada, sal e limão, seguido pelo copo na mão diante do Farol da Barra" aria-describedby="preparation-caption"><source src="assets/mangou-hero-4k.mp4" type="video/mp4"></video>
+        <figcaption id="preparation-caption">Veja o preparo do seu Mangou.</figcaption>
+      </figure>
     </section>
 
     <section class="flavors section" id="sabores" aria-labelledby="flavors-title">
