@@ -54,10 +54,10 @@ Os fundos da faixa de sabores, da localização e da chamada final receberam gra
 
 O vídeo enviado pelo usuário substitui as animações do copo. A página abre com o vídeo; `?hero=foto` abre a fotografia original. Links anteriores com `?hero=montagem` ou `?hero=montagem-original` também exibem o vídeo. O vídeo reproduz uma vez e mantém o último quadro, com controles de pausa, reprodução e repetição. Se o navegador bloquear a reprodução automática, o mesmo botão permite iniciá-la. A foto continua disponível pelo botão “Ver foto”.
 
-A versão atual usa `assets/mangou-hero-original.mp4`, uma cópia exata de “MANGOU_food_commercial_production_20261025001208.mp4”, enviado pelo usuário: H.264, 1280 × 720, 24 fps e 8 segundos. O arquivo mantém os bytes originais, sem upscale, conversão ou recompressão; sua integridade foi conferida por SHA-256.
+A versão atual usa `assets/mangou-hero-4k.mp4`, uma cópia exata de “MANGOU_food_commercial_production_20261025001208_4K.mp4”: H.264, 3840 × 2160, 24 fps, 8 segundos e 18.8 MB. Essa é a versão 4K gerada anteriormente a partir do vídeo enviado pelo usuário, com upscale Lanczos e nitidez suave. O arquivo 4K foi copiado sem nova conversão ou recompressão; sua integridade foi conferida por SHA-256.
 
 A faixa de áudio original está preservada no arquivo. A reprodução no hero permanece silenciosa pelo atributo `muted`. Os arquivos de mídia usam novos nomes para evitar a reutilização da versão anterior pelo cache do navegador.
 
-`assets/mangou-hero-poster-original.webp` é o primeiro quadro do vídeo original, exportado em WebP sem perdas e sem redimensionamento, em 1280 × 720. No desktop, o vídeo preenche o hero com o produto deslocado para a direita e um gradiente preserva o contraste do texto. No celular, o vídeo é exibido inteiro em 16:9 abaixo do texto, preservando a composição original. O vídeo usa `autoplay muted playsinline`.
+`assets/mangou-hero-poster-4k-mp4.webp` é o primeiro quadro do MP4 4K, exportado em WebP em 3840 × 2160. No desktop, o vídeo preenche o hero com o produto deslocado para a direita e um gradiente preserva o contraste do texto. No celular, o vídeo é exibido inteiro em 16:9 abaixo do texto, preservando a composição original. O vídeo usa `autoplay muted playsinline`.
 
 A chamada final com tiras fotográficas de manga permanece independente do hero. A faixa xadrez fica apenas na base da seção de localização.
