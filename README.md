@@ -11,7 +11,8 @@ Abra `index.html` no navegador ou sirva a raiz do repositório com qualquer serv
 - `index.html`: conteúdo, navegação e SEO básico.
 - `styles.css`: estilos mobile first, layout responsivo e fontes locais.
 - `script.js`: menu mobile, abas de sabores com teclado e créditos.
-- `cup-3d.js` e `cup-3d.css`: cena, montagem e controles 3D.
+- `cup-3d.js` e `cup-3d.css`: cena e montagem 3D com fundo transparente.
+- `cup-textures.js`: materiais derivados dos recortes macro existentes de manga, plástico e limão.
 - `cup-software.js`: projeção da mesma cena no Canvas em aparelhos sem WebGL.
 - `animacao-3d.html`: página dedicada à prévia interativa.
 - `assets/vendor`: Three.js r170 e sua licença MIT, servidos localmente.
@@ -19,7 +20,7 @@ Abra `index.html` no navegador ou sirva a raiz do repositório com qualquer serv
 
 ## Decisões de conteúdo e conversão
 
-O hero apresenta uma montagem 3D procedural do copo com manga, tempero, limão e tampa. A fotografia real do produto permanece como alternativa pelo controle “Ver foto”. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile e as abas de sabores são operacionais. Os textos foram reduzidos e a seção de perguntas frequentes foi removida para evitar repetição. Não há checkout, envio de pedidos ou formulário com armazenamento.
+O hero apresenta uma montagem 3D procedural do copo com manga, tempero, limão e tampa. A cena aparece diretamente sobre o verde da página, sem painel, legenda ou barra de progresso. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile e as abas de sabores são operacionais. Os textos foram reduzidos e a seção de perguntas frequentes foi removida para evitar repetição. Não há checkout, envio de pedidos ou formulário com armazenamento.
 
 O material usa as cores verde e amarelo da marca. Não inclui depoimentos inventados, contadores, selos comerciais, preços desatualizados, telefone não confirmado ou horário fixo. A comunicação de atendimento direciona aos Stories. Melhorar a conversão é um objetivo do projeto, não um resultado medido ou garantido.
 
@@ -60,10 +61,10 @@ Os fundos da faixa de sabores, da localização e da chamada final receberam gra
 
 ## Montagem 3D do copo
 
-O copo é uma malha de revolução com paredes de PET, borda, frisos e tampa abobadada. O logo original é aplicado em uma superfície curva. A manga usa 330 instâncias de uma geometria fina e curva, com variações de cor e textura procedural. O movimento é coreografado, sem motor de colisões: entrada do copo, queda da manga, tempero e limão, encaixe da tampa e rotação final suave.
+O copo é uma malha de revolução com paredes de PET, borda, frisos e tampa abobadada. O logo original é aplicado em uma superfície curva. A manga usa 330 instâncias de uma geometria fina e curva, com variações de cor, mapa de superfície extraído do recorte macro e relevo de fibras. Um volume interno texturizado dá densidade ao preenchimento; pequenas gotas e microvariações no PET refinam o acabamento. O movimento é coreografado, sem motor de colisões: entrada do copo, queda da manga, tempero e limão, encaixe da tampa e rotação final suave.
 
-A sequência dura 11,5 segundos e toca uma vez. Os controles permitem pausar, repetir, arrastar o progresso e alternar para a fotografia real. Ao sair da tela ou ocultar a aba, a renderização para; ao concluir a montagem, também não há loop contínuo. A densidade de pixels é limitada a 1,5 no celular e 2 no desktop. Com preferência por movimento reduzido, a página começa com o copo pronto; o visitante pode iniciar a sequência manualmente.
+A sequência dura 11,5 segundos e toca uma vez. Não há controles ou textos visuais sobre a cena. Um botão de pausa e repetição permanece disponível a leitores de tela e só aparece ao receber foco pelo teclado. Ao sair da tela ou ocultar a aba, a renderização para; ao concluir a montagem, também não há loop contínuo. A densidade de pixels é limitada a 1,5 no celular e 2 no desktop. Com preferência por movimento reduzido, a página começa com o copo pronto; o visitante pode iniciar a sequência manualmente.
 
-Three.js r170 é servido de `assets/vendor/three.module.min.js`, sem CDN. Se WebGL não estiver disponível, `cup-software.js` projeta as mesmas coordenadas e instâncias 3D no Canvas 2D, com iluminação simplificada. Se ambos falharem, permanece a fotografia real. Essa primeira versão é uma interpretação tridimensional do produto, sem captura volumétrica ou promessa de fidelidade fotográfica.
+Three.js r170 é servido de `assets/vendor/three.module.min.js`, sem CDN. Se WebGL não estiver disponível, `cup-software.js` projeta as mesmas coordenadas e instâncias 3D no Canvas 2D, com materiais derivados dos mesmos recortes macro e iluminação simplificada. Se ambos falharem, permanece um recorte do copo com transparência. Essa primeira versão é uma interpretação tridimensional do produto, sem captura volumétrica ou promessa de fidelidade fotográfica.
 
-Validação: sintaxe dos módulos; controles de progresso, repetição e alternância com a foto; renderização alternativa sem GPU; verificação dos vértices da manga dentro do copo concluído. O navegador de testes não oferece WebGL, portanto materiais físicos e reflexos da versão com GPU ainda precisam de conferência em um aparelho com WebGL.
+Validação: sintaxe dos módulos; ausência de painel e barra de progresso; pausa acessível por teclado; renderização alternativa sem GPU; verificação dos vértices da manga dentro do copo concluído. O navegador de testes não oferece WebGL, portanto materiais físicos e reflexos da versão com GPU ainda precisam de conferência em um aparelho com WebGL.

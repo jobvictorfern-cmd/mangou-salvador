@@ -1,4 +1,5 @@
 import * as THREE from './assets/vendor/three.module.min.js';
+import { createProductTextures } from './cup-textures.js?v=1';
 
 // Cena procedural: malhas tridimensionais, não fotografias giradas.
 const DURATION = 11.5;
@@ -77,7 +78,7 @@ async function initCup(root) {
   try {
     renderer = new THREE.WebGLRenderer({canvas, alpha: true, antialias: true, powerPreference: 'low-power'});
   } catch {
-    const { SoftwareCupRenderer } = await import('./cup-software.js');
+    const { SoftwareCupRenderer } = await import('./cup-software.js?v=2');
     renderer = new SoftwareCupRenderer(canvas);
     software = true;
   }
@@ -87,6 +88,8 @@ async function initCup(root) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
   const scene = new THREE.Scene();
+  const productTextures = await createProductTextures().catch(()=>null);
+  scene.userData.productTextures = productTextures;
   const environment = software ? null : makeEnvironment(renderer);
   if (environment) scene.environment = environment.texture;
   scene.environmentIntensity = .8;
@@ -96,7 +99,12 @@ async function initCup(root) {
   const key = new THREE.DirectionalLight('#fff7dc', 3.2); key.position.set(-3, 5, 4); scene.add(key);
   const fill = new THREE.DirectionalLight('#e7f4ce', 1.6); fill.position.set(4, 3, -2); scene.add(fill);
   const cup = new THREE.Group(); cup.name='cup'; scene.add(cup);
-  const plastic = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: .13, metalness: 0, transmission: 1, thickness: .025, ior: 1.46, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: 1.1});
+  const plastic = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: .085, metalness: 0, transmission: 1, thickness: .014, ior: 1.46, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: 1.1});
+  const petMicro=canvasTexture(128,512,(ctx,w,h)=>{
+    ctx.fillStyle='#808080';ctx.fillRect(0,0,w,h);const rand=seededRandom(81);
+    for(let i=0;i<190;i++){ctx.strokeStyle=`rgba(255,255,255,${.025+rand()*.06})`;ctx.lineWidth=.3+rand()*.4;const x=rand()*w,y=rand()*h;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+.4,y+8+rand()*34);ctx.stroke();}
+  });
+  petMicro.colorSpace=THREE.NoColorSpace;plastic.bumpMap=petMicro;plastic.bumpScale=.0012;
   const profile = [[0,.035],[.65,.035],[.685,.075],[.698,.18],[.94,2.7],[.965,2.77],[.965,2.8],[.94,2.8],[.918,2.7],[.677,.18],[.66,.105],[0,.105]].map(([x,y]) => new THREE.Vector2(x,y));
   const shell = new THREE.Mesh(new THREE.LatheGeometry(profile, 72), plastic); shell.name='shell'; cup.add(shell);
   const ringMaterial = new THREE.MeshPhysicalMaterial({color: '#ffffff', transmission: .92, thickness: .035, roughness: .16, ior: 1.46});
@@ -117,27 +125,32 @@ async function initCup(root) {
     }
   });
   fiber.colorSpace = THREE.NoColorSpace;
-  const fruitMaterial = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: .36, metalness: 0, clearcoat: .45, clearcoatRoughness: .25, bumpMap: fiber, bumpScale: .018});
-  const path = new THREE.CatmullRomCurve3([new THREE.Vector3(-.025,-.5,0),new THREE.Vector3(.025,-.18,.018),new THREE.Vector3(-.005,.2,.028),new THREE.Vector3(.03,.5,0)]);
+  const fruitMaterial = new THREE.MeshPhysicalMaterial({color: '#ffffff', map: productTextures?.fleshTexture || null, roughness: .39, metalness: 0, clearcoat: .28, clearcoatRoughness: .23, bumpMap: productTextures?.bumpTexture || fiber, bumpScale: .011});
+  const path = new THREE.CatmullRomCurve3([new THREE.Vector3(-.009,-.5,0),new THREE.Vector3(.012,-.18,.009),new THREE.Vector3(-.005,.2,.014),new THREE.Vector3(.011,.5,0)]);
   const fruitGeometry = new THREE.TubeGeometry(path, 18, .018, 6, false);
   const vertices = fruitGeometry.attributes.position;
   for (let i=0;i<vertices.count;i++) {
     const y=vertices.getY(i), taper=.4+.6*Math.sin(clamp(y+.5,0,1)*Math.PI)**.22;
     vertices.setX(i, vertices.getX(i)*2.2*taper);
-    vertices.setZ(i, vertices.getZ(i)*.72*taper);
+    vertices.setZ(i, vertices.getZ(i)*.48*taper);
   }
   fruitGeometry.computeVertexNormals();
   const count = 330;
+  let pile=null;
+  if(productTextures?.pileTexture) {
+    pile=new THREE.Mesh(new THREE.CylinderGeometry(.80,.59,2.45,48,1,true),new THREE.MeshPhysicalMaterial({map:productTextures.pileTexture,roughness:.47,clearcoat:.16,metalness:0,side:THREE.DoubleSide}));
+    pile.name='fruit-pile';cup.add(pile);
+  }
   const mango = new THREE.InstancedMesh(fruitGeometry, fruitMaterial, count);
   mango.name='mango';
   mango.instanceMatrix.setUsage(THREE.DynamicDrawUsage); mango.frustumCulled = false; cup.add(mango);
-  const palette = ['#f6d04c','#f4d75a','#ffe47c','#f4d34b','#f3db74','#ead57b','#f7dc83','#e4d782'];
+  const palette = productTextures ? ['#fffbe3','#f9f6dc','#fffef1','#f3f0d6','#fbf8de','#eeefcf','#fff9e2','#f5f0ce'] : ['#f6d04c','#f4d75a','#ffe47c','#f4d34b','#f3db74','#ead57b','#f7dc83','#e4d782'];
   const pieces = [];
   for (let i=0;i<count;i++) {
-    const layer=i/count, y=.65+layer*1.60, length=.45+random()*.54;
-    const rotation=new THREE.Euler((random()-.5)*1.25,random()*TAU,(random()-.5)*1.25);
+    const layer=i/count, y=.62+layer*1.74, length=.45+random()*.54;
+    const rotation=new THREE.Euler((random()-.5)*1.65,random()*TAU,(random()-.5)*(i%3===0?2.4:1.45));
     const reach=new THREE.Vector3(0,length*.54,0).applyEuler(rotation);
-    const availableRadius=Math.max(.2,.67+(y-length*.5)/2.8*.25-Math.hypot(reach.x,reach.z)-.09);
+    const availableRadius=Math.max(.06,.67+(y-length*.5)/2.8*.25-Math.hypot(reach.x,reach.z)-.09);
     const radius=availableRadius*Math.sqrt(random()),angle=random()*TAU;
     pieces.push({
       x:Math.cos(angle)*radius,z:Math.sin(angle)*radius,y,
@@ -185,6 +198,16 @@ async function initCup(root) {
   for(let i=0;i<64;i++) { const a=i/64*TAU;dummy.position.set(Math.sin(a)*.968,.005,Math.cos(a)*.968);dummy.rotation.set(0,a,0);dummy.updateMatrix();lidRibs.setMatrixAt(i,dummy.matrix); }
   lid.add(lidRibs);
 
+  const dew=new THREE.InstancedMesh(new THREE.SphereGeometry(1,6,4),plastic,72);dew.name='dew';
+  const dewRandom=seededRandom(902);let drops=0;
+  while(drops<72){
+    const a=(dewRandom()-.5)*2.8,y=.25+dewRandom()*2.38;
+    if(y>.65&&y<2.12&&Math.abs(a)<.83)continue;
+    const r=.69+y/2.8*.27+.007,size=.006+dewRandom()*.013;
+    dummy.position.set(Math.sin(a)*r,y,Math.cos(a)*r);dummy.rotation.set(0,a,0);dummy.scale.set(size,size*1.16,size*.36);dummy.updateMatrix();dew.setMatrixAt(drops++,dummy.matrix);
+  }
+  dew.frustumCulled=false;cup.add(dew);
+
   const shadowTexture = canvasTexture(256,256,(ctx,w,h)=>{
     const g=ctx.createRadialGradient(w/2,h/2,2,w/2,h/2,w*.48);g.addColorStop(0,'rgba(22,48,16,.36)');g.addColorStop(.4,'rgba(22,48,16,.18)');g.addColorStop(1,'rgba(22,48,16,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
   });
@@ -206,6 +229,7 @@ async function initCup(root) {
   function paint() {
     cup.position.y= -.25*(1-smooth(0,.8,time));
     cup.rotation.y= -.1 + Math.sin(smooth(7.8,DURATION,time)*Math.PI)*.34;
+    if(pile){const fill=smooth(1.15,5.4,time);pile.visible=fill>.005;pile.scale.y=Math.max(.001,fill);pile.position.y=.20+2.45*fill/2;pile.userData.fill=fill;}
     for(let i=0;i<count;i++) {
       const p=pieces[i],progress=clamp((time-p.start)/p.fall,0,1);
       const falling=progress<1;
@@ -226,22 +250,20 @@ async function initCup(root) {
     const lidProgress=smooth(6.5,7.9,time);
     lid.visible=time>6.5;lid.position.y=2.82+(1-easeOut(lidProgress))*2.7;
     const phase=time<1?'Seu copo, do seu jeito.':time<5.1?'Manga fresquinha.':time<6.5?'Limão e tempero.':time<8?'O toque final.':'Pronto pro rolê.';
-    if(phase!==lastPhase){status.textContent=phase;lastPhase=phase;}
-    seek.value=String(time/DURATION*100);
-    seek.setAttribute('aria-valuetext',phase);
+    if(phase!==lastPhase){if(status)status.textContent=phase;lastPhase=phase;}
+    if(seek){seek.value=String(time/DURATION*100);seek.setAttribute('aria-valuetext',phase);}
     root.dataset.phase=time<1?'copo':time<5.1?'manga':time<6.5?'tempero':time<8?'tampa':'pronto';
     root.dataset.progress=time.toFixed(2);
     renderer.render(scene,camera);
   }
   function syncControls() {
-    toggle.textContent=photoMode?'Ver montagem 3D':time>=DURATION?'Montar de novo':playing?'Pausar':'Continuar';
-    toggle.setAttribute('aria-pressed',String(!playing));
-    replay.disabled=photoMode;
+    if(toggle){toggle.textContent=playing?'Pausar montagem do copo':time>=DURATION?'Repetir montagem do copo':'Retomar montagem do copo';toggle.setAttribute('aria-pressed',String(!playing));}
+    if(replay)replay.disabled=photoMode;
   }
   function tick(now) {
     frame=0;
     if(!playing||!visible||document.hidden||photoMode)return;
-    if(previous)time=Math.min(DURATION,time+Math.min((now-previous)/1000,.06));
+    if(previous)time=Math.min(DURATION,time+(now-previous)/1000);
     previous=now;paint();
     if(time>=DURATION){playing=false;syncControls();return;}
     frame=requestAnimationFrame(tick);
@@ -249,14 +271,14 @@ async function initCup(root) {
   function schedule() {previous=0;if(!frame&&playing&&visible&&!document.hidden&&!photoMode)frame=requestAnimationFrame(tick);}
   function pause() {playing=false;cancelAnimationFrame(frame);frame=0;syncControls();}
   function play(restart=false) {
-    photoMode=false;root.classList.remove('is-photo');photo.textContent='Ver foto';photo.setAttribute('aria-pressed','false');
+    photoMode=false;root.classList.remove('is-photo');if(photo){photo.textContent='Ver foto';photo.setAttribute('aria-pressed','false');}
     if(restart||time>=DURATION)time=0;
     playing=true;syncControls();schedule();
   }
-  toggle.addEventListener('click',()=>photoMode?play():playing?pause():play());
-  replay.addEventListener('click',()=>play(true));
-  seek.addEventListener('input',()=>{pause();time=Number(seek.value)/100*DURATION;paint();syncControls();});
-  photo.addEventListener('click',()=>{
+  toggle?.addEventListener('click',()=>photoMode?play():playing?pause():play());
+  replay?.addEventListener('click',()=>play(true));
+  seek?.addEventListener('input',()=>{pause();time=Number(seek.value)/100*DURATION;paint();syncControls();});
+  photo?.addEventListener('click',()=>{
     if(photoMode){play();return;}
     pause();photoMode=true;root.classList.add('is-photo');photo.textContent='Ver 3D';photo.setAttribute('aria-pressed','true');syncControls();
   });
@@ -268,14 +290,14 @@ async function initCup(root) {
     if(!width||!height)return;
     renderer.setSize(width,height,false);camera.aspect=width/height;
     // O enquadramento também inclui os ingredientes que entram por cima.
-    camera.position.z=width<500?9.1:8.1;camera.updateProjectionMatrix();paint();
+    camera.position.z=width<500?8.5:7.7;camera.updateProjectionMatrix();paint();
   }
   new ResizeObserver(resize).observe(root);
-  canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();pause();root.dataset.state='fallback';status.textContent='Manga fresca. Do seu jeito.';});
+  canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();pause();root.dataset.state='fallback';if(status)status.textContent='Manga fresca. Do seu jeito.';});
   root.dataset.renderer=software?'software':'webgl';
   root.dataset.state='ready';resize();syncControls();schedule();
 }
 
 document.querySelectorAll('[data-mangou-3d]').forEach(root=>{
-  initCup(root).catch(()=>{root.dataset.state='fallback';root.querySelector('[data-cup-status]').textContent='Manga fresca. Do seu jeito.';});
+  initCup(root).catch(()=>{root.dataset.state='fallback';const status=root.querySelector('[data-cup-status]');if(status)status.textContent='Manga fresca. Do seu jeito.';});
 });
