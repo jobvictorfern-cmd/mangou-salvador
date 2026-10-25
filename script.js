@@ -37,22 +37,76 @@ document.addEventListener('click', event => { if (!event.target.closest('.header
 window.matchMedia('(min-width: 801px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
 
 const flavors = {
-  classico: {
-    profile: 'CÍTRICO & FAMILIAR', title: 'O clássico.',
-    description: 'Aquele gostinho de infância, com limão e sal.',
-    ingredients: ['Manga', 'Limão', 'Sal'], image: 'assets/manga.webp', alt: 'Copo de manga fresca com limão da Mangou', tag: 'O GOSTINHO DE INFÂNCIA'
+  "classico": {
+    "title": "Não tem erro",
+    "description": "",
+    "ingredients": [
+      "Manga",
+      "Limão",
+      "Sal"
+    ],
+    "image": "assets/manga.webp",
+    "alt": "Copo Mangou; imagem ilustrativa da apresentação, sem representar uma receita específica"
   },
-  fumace: {
-    profile: 'DEFUMADO & MARCANTE', title: 'O defumado.',
-    description: 'Um toque defumado para sair do clássico.',
-    ingredients: ['Manga', 'Limão', 'Páprica', 'Pimenta-do-reino', 'Fumacê em pó'], image: 'assets/manga.webp', alt: 'Manga fresca da Mangou; foto ilustrativa da apresentação no copo', tag: 'CONHEÇA O TOQUE DEFUMADO'
+  "misere": {
+    "title": "Miserê",
+    "description": "",
+    "ingredients": [
+      "Manga",
+      "Limão",
+      "Sal",
+      "Tajín"
+    ],
+    "image": "assets/tajin.webp",
+    "alt": "Publicação oficial da Mangou com Tajín e o copo de manga temperada"
   },
-  misere: {
-    profile: 'CÍTRICO & PICANTE', title: 'O picante.',
-    description: 'Tajín, limão e uma picância que chega junto.',
-    ingredients: ['Manga', 'Tajín', 'Pimentas', 'Limão', 'Sal'], image: 'assets/tajin.webp', alt: 'Publicação oficial da Mangou apresentando o Tajín e o copo de manga temperada', tag: 'TAJÍN NO TEMPERO'
+  "fumace": {
+    "title": "Fumacê",
+    "description": "",
+    "ingredients": [
+      "Manga",
+      "Limão",
+      "Sal",
+      "Pimenta-do-reino",
+      "Fumaça em pó",
+      "Páprica defumada"
+    ],
+    "image": "assets/manga.webp",
+    "alt": "Copo Mangou; imagem ilustrativa da apresentação, sem representar uma receita específica"
+  },
+  "dengosa": {
+    "title": "Dengosa",
+    "description": "",
+    "ingredients": [
+      "Manga",
+      "Limão",
+      "Lemon pepper",
+      "Leite condensado"
+    ],
+    "image": "assets/manga.webp",
+    "alt": "Copo Mangou; imagem ilustrativa da apresentação, sem representar uma receita específica"
+  },
+  "dengo": {
+    "title": "Dengo",
+    "description": "Ingredientes em breve.",
+    "ingredients": [],
+    "image": "assets/manga.webp",
+    "alt": "Copo Mangou; imagem ilustrativa da apresentação, sem representar uma receita específica"
+  },
+  "xodo": {
+    "title": "Xodó",
+    "description": "",
+    "ingredients": [
+      "Manga",
+      "Limão",
+      "Mostarda",
+      "Mel"
+    ],
+    "image": "assets/manga.webp",
+    "alt": "Copo Mangou; imagem ilustrativa da apresentação, sem representar uma receita específica"
   }
 };
+
 const tabs = Array.from(document.querySelectorAll('[data-flavor]'));
 const panel = document.querySelector('#flavor-panel');
 function selectFlavor(tab) {
@@ -62,8 +116,12 @@ function selectFlavor(tab) {
   const title = document.querySelector('#flavor-name');
   title.replaceChildren();
   flavor.title.split('\n').forEach((line, index) => { if (index) title.append(document.createElement('br')); title.append(document.createTextNode(line)); });
-  document.querySelector('#flavor-description').textContent = flavor.description;
-  document.querySelector('#ingredients').replaceChildren(...flavor.ingredients.map(ingredient => { const span = document.createElement('span'); span.textContent = ingredient; return span; }));
+  const description = document.querySelector('#flavor-description');
+  description.textContent = flavor.description;
+  description.hidden = !flavor.description;
+  const ingredients = document.querySelector('#ingredients');
+  ingredients.replaceChildren(...flavor.ingredients.map(ingredient => { const span = document.createElement('span'); span.textContent = ingredient; return span; }));
+  ingredients.hidden = !flavor.ingredients.length;
   const image = document.querySelector('#flavor-image');
   image.src = flavor.image;
   image.alt = flavor.alt;

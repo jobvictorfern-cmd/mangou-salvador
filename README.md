@@ -24,7 +24,7 @@ O hero apresenta uma montagem 3D procedural do copo com manga, tempero, limão e
 
 O material usa as cores verde e amarelo da marca. Não inclui depoimentos inventados, contadores, selos comerciais, preços desatualizados, telefone não confirmado ou horário fixo. A comunicação de atendimento direciona aos Stories. Melhorar a conversão é um objetivo do projeto, não um resultado medido ou garantido.
 
-O cardápio mostra três combinações verificadas. Limão e sal descreve a combinação e não presume um nome comercial. Miserê e seu uso de Tajín foram observados no perfil oficial. Os ingredientes de Fumacê foram descritos na matéria indicada abaixo. A foto de manga usada ao apresentar Fumacê ilustra o formato do produto, sem afirmar que mostra essa receita. Todas as linhas de apoio acima dos títulos foram removidas.
+O cardápio apresenta seis sabores informados pelo responsável: Não tem erro (manga, limão e sal); Miserê (manga, limão, sal e Tajín); Fumacê (manga, limão, sal, pimenta-do-reino, fumaça em pó e páprica defumada); Dengosa (manga, limão, lemon pepper e leite condensado); Dengo (receita ainda não informada, exibida como “Ingredientes em breve”); Xodó (manga, limão, mostarda e mel). A receita de Dengo não foi presumida. As fotografias genéricas ilustram a apresentação do produto e não pretendem retratar as novas receitas. As abas mantêm navegação por teclado e o conteúdo inicial do HTML corresponde a Não tem erro.
 
 ## Layout mobile first
 

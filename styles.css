@@ -105,6 +105,7 @@ h2 { margin: 0; font: 800 clamp(32px, 8.7vw, 40px)/1.1 var(--display); letter-sp
 .flavor-tabs button[aria-selected=true] { background: var(--green); color: var(--cream); }
 #flavor-name { margin: 0 0 18px; font: 800 clamp(31px, 9vw, 40px)/1.08 var(--display); letter-spacing: -.045em; }
 .flavor-description { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+.ingredients[hidden] { display: none; }
 .ingredients { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0; }
 .ingredients > span { padding: 7px 10px; border: 1px solid #bdc9b1; border-radius: 4px; font-size: 11px; }
 .flavor-details .button { width: 100%; }
