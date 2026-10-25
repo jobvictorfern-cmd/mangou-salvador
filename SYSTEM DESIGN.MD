@@ -258,7 +258,7 @@ Direção final após orientação do usuário: queda contínua por toda a largu
 | Registrar pedido, ativo e direção | Concluída |
 | Implementar sprites, queda e controle de pausa | Concluída |
 | Conferir animação, celular, movimento reduzido e navegação | Concluída |
-| Publicar e verificar o endereço público | Pendente |
+| Publicar e verificar o endereço público | Concluída |
 
 Durante a implementação, o usuário pediu mais fios e a queda em toda a área do hero. Densidade ampliada de 14 para 28 trilhas no desktop e de 7 para 14 no celular, com entradas adicionais mais frequentes. A camada foi movida da fotografia para a seção inteira; acompanha os limites do hero e é cortada na transição para o cardápio.
 
@@ -268,4 +268,6 @@ Validação local: cobertura do hero e ausência de transbordamento conferidas e
 
 25/10/2026 — O usuário enviou uma arte Mangou como referência de textura. Aplicação planejada: reproduzir o acabamento de papel granulado nos fundos e nas molduras, preservando a paleta atual e a nitidez de fotos, textos e controles. Criar uma textura SVG procedural local, estática e repetível, com composição `soft-light` sobre as cores existentes. A arte de referência não será repetida como estampa de logos. Não é necessária edição dos arquivos fotográficos nem outra imagem gerada.
 
-Implementação e conferência local concluídas. `assets/papel-grain.svg`: 686 bytes, XML válido, bloco repetível de 160 × 160 px. Fundos verde, amarelo e papel e molduras usam a mesma textura; nenhuma camada é aplicada sobre as fotografias ou sobre o texto. Conferência visual em desktop e celular e leitura das propriedades calculadas confirmaram imagem e composição corretas. `node checks/site.mjs` passou, incluindo todos os novos ativos CSS; `git diff --check` sem erro. CSS e JS v26. Publicação e conferência pública pendentes. Os testes foram feitos no navegador, sem aparelho físico.
+Implementação e conferência local concluídas. `assets/papel-grain.svg`: 686 bytes, XML válido, bloco repetível de 160 × 160 px. Fundos verde, amarelo e papel e molduras usam a mesma textura; nenhuma camada é aplicada sobre as fotografias ou sobre o texto. Conferência visual em desktop e celular e leitura das propriedades calculadas confirmaram imagem e composição corretas. `node checks/site.mjs` passou, incluindo todos os novos ativos CSS; `git diff --check` sem erro. CSS e JS v26. Os testes foram feitos no navegador, sem aparelho físico.
+
+Publicação das seções 17 e 18 concluída: commit `c6745514b83cf5ae43dc484ee1da82ab3421d995`, GitHub Pages `40229935750` com `success`. URL: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=c674551. HTML, PNG e textura retornaram HTTP 200; CSS publicado idêntico ao commit. O SHA-256 do PNG remoto também corresponde ao original enviado. Navegador público em 390 px: 14 trilhas, queda em toda a área do hero, reprodução voluntária funcionando com movimento reduzido, textura correta e nenhum transbordamento. Evidências em `verificacao/mangou-redesign/hero-textura-fios.jpg` e `fios-larguras.json`, na pasta acima do repositório.
