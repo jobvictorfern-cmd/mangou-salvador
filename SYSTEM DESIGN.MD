@@ -306,3 +306,5 @@ Plano: retirar a cor de fundo, a textura de papel e o divisor inferior do header
 Implementação: `styles.css` deixa `.site-header` transparente e remove apenas esse elemento da aplicação de textura. Altura, `position: sticky`, links e menu permanecem intactos. `index.html` aponta para CSS v28 para invalidar o cache.
 
 Primeira alteração: commit `03e8185` e GitHub Pages `40233517747` concluído com sucesso. A captura enviada mostrou que o fundo do body ainda aparecia no espaço do header. Revisão implementada: o header agora é filho sticky do hero, sem fundo/textura/filete, com marca, menu e links em cores de contraste. A altura do header é compensada no fluxo e o início do conteúdo do hero preservado nos breakpoints móvel e desktop; CSS v29.
+
+Publicação verificada: commit `325184b`; GitHub Pages `40233979532` concluído com sucesso. No navegador público, a faixa creme desapareceu e a navegação permanece legível sobre o verde. Evidência: `verificacao/mangou-redesign/header-transparente-publico.png`, fora da raiz do repositório.
