@@ -41,8 +41,8 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
 .js .site-nav.is-open{display:flex}
 
 /* A campanha usa a frase do rótulo e a fotografia original, sem redesenhar o produto. */
-.hero{position:relative;overflow:clip;background:var(--green);color:var(--paper)}
-.hero-layout{position:relative;display:grid;gap:18px;padding-block:28px 0}
+.hero{position:relative;isolation:isolate;overflow:clip;background:var(--green);color:var(--paper)}
+.hero-layout{position:relative;z-index:1;display:grid;gap:18px;padding-block:28px 0}
 .hero-heading{grid-row:1;position:relative;z-index:1}
 .hero-intro{margin-bottom:13px;font-size:13px;font-weight:650}
 .hero h1{font:850 1em/.94 var(--display);letter-spacing:-.06em}
@@ -52,7 +52,24 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
 .hero-copy>p:first-child{grid-row:3;position:relative;z-index:1;max-width:43ch;font-size:15px;line-height:1.6}
 .hero-copy .hero-location{grid-row:4;position:relative;z-index:1;margin:0;color:#d5e2d4;font-size:11px}
 .hero-product{grid-row:5;position:relative;width:calc(100% + var(--gutter)*2);height:330px;margin-inline:calc(-1 * var(--gutter));overflow:hidden;pointer-events:none}
-.hero-product svg{position:absolute;top:0;left:calc(50% - 112px);width:450px;max-width:none;height:auto}
+.hero-product svg{position:absolute;z-index:1;top:0;left:calc(50% - 112px);width:450px;max-width:none;height:auto}
+.mango-rain{position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none}
+.hero>.checker{position:relative;z-index:1}
+.mango-strand{position:absolute;top:-180px;left:var(--x);width:calc(var(--size)/2);height:100%;transform-origin:50% 60px;animation:mango-fall var(--duration) var(--delay) linear infinite;animation-play-state:paused}
+.mango-strand::before{content:'';display:block;width:100%;height:var(--size);background:url('assets/fios-manga.png') 0 0/300% 100% no-repeat}
+.mango-strand:nth-child(3n+2)::before{background-position:50% 0}
+.mango-strand:nth-child(3n)::before{background-position:100% 0}
+.mango-strand:nth-child(n+15){display:none}
+.mango-rain.is-playing .mango-strand{animation-play-state:running}
+.hero-motion-toggle{position:absolute;z-index:2;right:0;bottom:18px;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #fcf8e980;border-radius:4px;background:var(--green);color:var(--paper);font-size:22px;line-height:1}
+.motion-play,.hero-motion-toggle.is-paused .motion-pause{display:none}
+.hero-motion-toggle.is-paused .motion-play{display:block;font-size:15px}
+@keyframes mango-fall{
+  0%{opacity:0;transform:translate3d(0,-100px,0) rotate(var(--turn))}
+  12%{opacity:.95}
+  85%{opacity:.95}
+  100%{opacity:0;transform:translate3d(var(--drift),calc(100% + 200px),0) rotate(var(--end-turn))}
+}
 .hero-actions{grid-row:2;position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
 .hero .button{background:var(--yellow);border-color:var(--yellow);color:var(--green)}
 .hero-actions .button{width:100%}
@@ -181,6 +198,8 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
   .hero-answer{font-size:clamp(96px,9.2vw,134px)}
   .hero-product{position:absolute;top:42px;right:-190px;width:740px;height:920px;margin:0;overflow:visible}
   .hero-product svg{top:0;left:0;width:100%;height:auto}
+  .mango-strand:nth-child(n+15){display:block}
+  .hero-motion-toggle{bottom:24px}
   .hero-copy{display:block;grid-column:1;grid-row:2;align-self:start}
   .hero-copy>p:first-child{font-size:16px}
   .hero-actions{gap:10px 22px;margin-top:22px}
@@ -222,6 +241,11 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
   .social-photo:hover{outline:2px solid var(--green);outline-offset:4px}
 }
 @media(prefers-reduced-motion:reduce){
+  .mango-rain:not(.is-playing){display:none}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
+  .mango-rain.is-playing .mango-strand{animation:mango-fall var(--duration) var(--delay) linear infinite!important}
 }
+
+/* Papel impresso apenas nos fundos: a fotografia e a tipografia mantêm nitidez. */
+body,.top-note,.site-header,.hero,.flavors,.flavor[open],.social-photo,.location,.location-photo,.menu-photo{background-image:url('assets/papel-grain.svg');background-size:160px 160px;background-blend-mode:soft-light}

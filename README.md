@@ -16,11 +16,15 @@ O [SYSTEM DESIGN.MD](<SYSTEM DESIGN.MD>) documenta escopo, fontes, tokens visuai
 
 - `index.html`: conteúdo, receitas, links e créditos.
 - `styles.css`: sistema visual e layout mobile first.
-- `script.js`: menu, ano do rodapé e WhatsApp opcional.
+- `script.js`: menu, pausa da animação, ano do rodapé e WhatsApp opcional.
 - `assets/`: mídias e fontes locais.
 - `checks/site.mjs`: verificação de desenvolvimento, sem dependências.
 
 A composição usa papel claro, verde, amarelo, xadrez e fotos reais. O hero traz a brincadeira do rótulo e o copo integrado ao fundo verde. A ação de sabores aparece antes da fotografia no celular. Não há botão flutuante, formulário, checkout, contadores, depoimentos fabricados ou rastreador novo.
+
+Os fios de manga caem por toda a área do hero: 28 trilhas no desktop e 14 no celular. O botão no canto pausa/retoma a queda. Fora da tela ou com a aba oculta, a animação para. Com movimento reduzido no aparelho, começa parada e pode ser iniciada pelo botão. O PNG `assets/fios-manga.png` é o original transparente enviado pelo usuário, reaproveitado em três sprites CSS.
+
+`assets/papel-grain.svg` aplica uma textura estática de papel impresso aos fundos e molduras por `background-blend-mode: soft-light`. A textura não cobre fotos, textos ou controles. Não há dependência nova.
 
 ## Manutenção
 

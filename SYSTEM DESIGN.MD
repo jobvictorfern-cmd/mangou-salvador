@@ -62,14 +62,14 @@ Paleta interpretada das cores recorrentes do perfil e do logo já existente; nã
 - Conteúdo: largura máxima de 1240 px; margens de 20 px no celular, ampliadas progressivamente.
 - Fotografias: produto integrado ao hero por máscara SVG; bordas de papel e pequenas inclinações na galeria e no cardápio. Sem filtro que altere o alimento.
 - Botões: área de toque de pelo menos 48 px, borda definida e contraste forte. Sem botões flutuantes cobrindo conteúdo.
-- Foco: contorno visível de alto contraste. Movimento: somente estados de interação; sem chuva de elementos ou animação contínua na LP reconstruída.
+- Foco: contorno visível de alto contraste. Movimento: queda decorativa de fios no hero, com pausa voluntária, interrupção fora da tela e preferência de movimento reduzido; demais seções mantêm apenas estados de interação.
 
 ### Componentes
 
 | Componente | Solução | Estados importantes |
 | --- | --- | --- |
 | Cabeçalho | Marca, três âncoras e Instagram | Menu móvel fechado/aberto, Escape, retorno de foco |
-| Hero | Frase da embalagem, produto recortado, sabores e localização | Imagem priorizada, SVG com nome acessível, ações visíveis |
+| Hero | Frase da embalagem, produto recortado, fios caindo, sabores e localização | Imagem priorizada, SVG com nome acessível, ações visíveis e pausa dos fios |
 | Cardápio | Seis elementos `details` com ingredientes | Primeiro aberto; abertura pelo toque e teclado; uso sem JS |
 | Galeria | Fotos/capas reais ligadas aos Reels originais | Links com nome acessível, rolagem horizontal interna no celular |
 | Localização | Foto do Farol, Maps, Waze e Instagram | Sem afirmar ponto ou horário exato não confirmado |
@@ -120,6 +120,8 @@ As páginas e fontes da prévia 3D anterior não precisam ser apagadas para refa
 | Arquivo | Origem pública observada | Uso |
 | --- | --- | --- |
 | `assets/manga.webp` | https://www.instagram.com/mangou.salvador/p/Ddr6zo-EYwB/ | Hero; fotografia real já preservada no projeto |
+| `assets/fios-manga.png` | PNG transparente enviado pelo usuário em 25/10/2026 | Três fios originais reaproveitados em sprites CSS |
+| `assets/papel-grain.svg` | Textura procedural local, inspirada na arte enviada pelo usuário | Granulado estático nos fundos e nas molduras |
 | `assets/role-barra.jpg` | https://www.instagram.com/mangou.salvador/reel/Dcg7NSwpMDw/ | Capa do Reel com duas pessoas na orla |
 | `assets/role-resenha.jpg` | https://www.instagram.com/esthervasconcelos2001/reel/DdM_B7ihvQf/ | Capa de publicação colaborativa, pessoa experimentando o produto |
 | `assets/role-manga.jpg` | https://www.instagram.com/es.sancho/reel/DdMwPkLJcX_/ | Fotografia/capa do produto com a orla ao fundo |
@@ -244,3 +246,26 @@ Resultado local: botão, alternativa direta, diálogo, símbolo de play e códig
 Implementação e conferência local concluídas: link, contêiner e regras CSS exclusivos removidos; CSS v24. Verificação estrutural passou com 34 referências locais, sem erro de whitespace. Navegador em 390 px: três fotografias da galeria preservadas, sem chamada de imprensa, sem filme, sem transbordamento e com a transição para localização conferida visualmente.
 
 As duas remoções foram publicadas nos commits `843c1f12f1eac349e13996ff9471230c0f51dcaf` e `7786ed3787812ced6a2f40cf10f8325969896848`. GitHub Pages: execução `40228350267`, resultado `success`. Endereço conferido: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=7786ed3. HTTP 200; HTML público com CSS v24 e JS v23, sem os dois componentes. Conferência pública em 390 px confirmou ausência das chamadas, três fotografias e largura útil igual à do documento. Etapas das seções 15 e 16 concluídas.
+
+## 17. Fios de manga caindo no hero
+
+25/10/2026 — Pedido: animar vários fios de manga caindo, usando a imagem enviada `Três fios de manga verde.png`. Plano registrado antes da implementação: copiar o PNG original, que já possui transparência real, e reaproveitar seus três fios como sprites CSS. Não é necessária geração de outra imagem. O arquivo original será preservado byte a byte em `assets/fios-manga.png`.
+
+Direção final após orientação do usuário: queda contínua por toda a largura e altura do hero, com tamanhos, inclinações, trajetórias e tempos diferentes. Camada decorativa atrás de texto, botões e fotografia, sem interceptar cliques. Menos fios no celular. Transformações e opacidade em CSS, sem canvas, biblioteca ou vídeo. Controle de pausa e pausa quando o hero não estiver visível ou a aba estiver oculta. Com `prefers-reduced-motion`, iniciar parada e permitir ativação voluntária pelo mesmo botão.
+
+| Etapa | Estado |
+| --- | --- |
+| Registrar pedido, ativo e direção | Concluída |
+| Implementar sprites, queda e controle de pausa | Concluída |
+| Conferir animação, celular, movimento reduzido e navegação | Concluída |
+| Publicar e verificar o endereço público | Pendente |
+
+Durante a implementação, o usuário pediu mais fios e a queda em toda a área do hero. Densidade ampliada de 14 para 28 trilhas no desktop e de 7 para 14 no celular, com entradas adicionais mais frequentes. A camada foi movida da fotografia para a seção inteira; acompanha os limites do hero e é cortada na transição para o cardápio.
+
+Validação local: cobertura do hero e ausência de transbordamento conferidas em 320, 390, 800, 960 e 1440 px. Contagem renderizada: 14 trilhas abaixo de 960 px e 28 a partir dessa largura. Imagem original e cópia com SHA-256 `953424b21d83c3488344ec3597554f5727167b2bf0eae3a917980eecbea82788`. A imagem compartilhada tem 1.618.684 bytes; não houve recompressão. As transformações avançam entre observações, o controle pausa e retoma por clique/teclado, a saída do hero interrompe a queda e o retorno retoma. A preferência real de movimento reduzido do navegador foi detectada: início parado e reprodução voluntária conferidos. Nenhum erro de console na rodada móvel. A interrupção por aba oculta foi implementada; não foi simulada nesta rodada.
+
+## 18. Textura de papel impresso
+
+25/10/2026 — O usuário enviou uma arte Mangou como referência de textura. Aplicação planejada: reproduzir o acabamento de papel granulado nos fundos e nas molduras, preservando a paleta atual e a nitidez de fotos, textos e controles. Criar uma textura SVG procedural local, estática e repetível, com composição `soft-light` sobre as cores existentes. A arte de referência não será repetida como estampa de logos. Não é necessária edição dos arquivos fotográficos nem outra imagem gerada.
+
+Implementação e conferência local concluídas. `assets/papel-grain.svg`: 686 bytes, XML válido, bloco repetível de 160 × 160 px. Fundos verde, amarelo e papel e molduras usam a mesma textura; nenhuma camada é aplicada sobre as fotografias ou sobre o texto. Conferência visual em desktop e celular e leitura das propriedades calculadas confirmaram imagem e composição corretas. `node checks/site.mjs` passou, incluindo todos os novos ativos CSS; `git diff --check` sem erro. CSS e JS v26. Publicação e conferência pública pendentes. Os testes foram feitos no navegador, sem aparelho físico.

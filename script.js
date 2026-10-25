@@ -39,4 +39,29 @@ document.addEventListener('keydown', event => {
 });
 window.matchMedia('(min-width: 960px)').addEventListener('change', closeMenu);
 
+const mangoRain = document.querySelector('#mango-rain');
+const motionToggle = document.querySelector('.hero-motion-toggle');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let heroVisible = false;
+let rainPaused = reducedMotion.matches;
+function updateRain() {
+  motionToggle.hidden = false;
+  motionToggle.classList.toggle('is-paused', rainPaused);
+  motionToggle.setAttribute('aria-label', rainPaused ? 'Reproduzir queda dos fios de manga' : 'Pausar queda dos fios de manga');
+  mangoRain.classList.toggle('is-playing', heroVisible && !document.hidden && !rainPaused);
+}
+new IntersectionObserver(entries => {
+  heroVisible = entries[0].isIntersecting;
+  updateRain();
+}).observe(document.querySelector('.hero'));
+motionToggle.addEventListener('click', () => {
+  rainPaused = !rainPaused;
+  updateRain();
+});
+reducedMotion.addEventListener('change', () => {
+  rainPaused = reducedMotion.matches;
+  updateRain();
+});
+document.addEventListener('visibilitychange', updateRain);
+
 document.querySelector('#year').textContent = new Date().getFullYear();
