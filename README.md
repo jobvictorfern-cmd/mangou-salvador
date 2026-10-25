@@ -6,7 +6,7 @@ Landing page estática em **HTML, CSS e JavaScript puro**, sem framework, depend
 
 Sirva a raiz com `python -m http.server 8130 --bind 127.0.0.1` e abra http://127.0.0.1:8130/.
 
-Execute `node checks/site.mjs` para conferir referências locais, IDs, ARIA, imagens, seis sabores, carregamento do vídeo e sintaxe de JavaScript.
+Execute `node checks/site.mjs` para conferir referências locais, IDs, ARIA, imagens, seis sabores, ausência do componente de filme e sintaxe de JavaScript.
 
 O GitHub Pages publica a raiz da branch `main`: https://jobvictorfern-cmd.github.io/mangou-salvador/
 
@@ -14,9 +14,9 @@ O GitHub Pages publica a raiz da branch `main`: https://jobvictorfern-cmd.github
 
 O [SYSTEM DESIGN.MD](<SYSTEM DESIGN.MD>) documenta escopo, fontes, tokens visuais, componentes, etapas, validação e limites. Foi criado antes da reconstrução.
 
-- `index.html`: conteúdo, receitas, links, créditos e vídeo.
+- `index.html`: conteúdo, receitas, links e créditos.
 - `styles.css`: sistema visual e layout mobile first.
-- `script.js`: menu, diálogo do filme e WhatsApp opcional.
+- `script.js`: menu, ano do rodapé e WhatsApp opcional.
 - `assets/`: mídias e fontes locais.
 - `checks/site.mjs`: verificação de desenvolvimento, sem dependências.
 
@@ -30,13 +30,13 @@ A bio pública foi revisitada em 25/10/2026: sábados e domingos na Barra, com d
 
 O WhatsApp fica oculto enquanto `WHATSAPP_NUMBER` em `script.js` estiver vazio. Quando houver confirmação, preencha 55 + DDD + número, somente dígitos. O contato aparece no rodapé, sem botão flutuante.
 
-## Fotografias e filme
+## Fotografias e ativos preservados
 
 O hero usa `assets/manga.webp`, foto real já existente no projeto, com o copo e a mão recortados por `clipPath` SVG inline em `index.html`. O arquivo da fotografia permanece intacto. Ao trocar a foto, ajuste também essa máscara. Quatro novas capas públicas foram recolhidas da grade do Instagram: `role-barra.jpg`, `role-resenha.jpg`, `role-manga.jpg` e `role-preparo.jpg`. Fontes e usos estão no System Design; cada imagem da galeria abre sua publicação original.
 
 As publicações completas solicitaram login. Foram coletadas as capas públicas; os Reels completos não foram baixados. O filme local é o material anterior do projeto, independente desses Reels.
 
-O MP4 4K existente permanece sem recompressão. Seu endereço só é atribuído ao vídeo depois do clique. Sem JS ou suporte ao diálogo, há link direto. As fontes Bricolage Grotesque e DM Sans são locais e suas licenças permanecem em `assets/`.
+O botão do filme, seu diálogo e os controles associados foram removidos da LP a pedido do usuário. O MP4 4K permanece no repositório sem recompressão, sem ser referenciado ou carregado pela página principal. As fontes Bricolage Grotesque e DM Sans são locais e suas licenças permanecem em `assets/`.
 
 Créditos e links de procedência estão no rodapé e no System Design. As referências de design Maono, Fishwife e Tacombi não forneceram ativos para a LP. Fotografias e marca pertencem aos respectivos titulares.
 

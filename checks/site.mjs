@@ -26,11 +26,11 @@ for (const [tag] of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) {
   assert.ok(/\brel="[^"]*\bnoopener\b/.test(tag), 'Link externo sem noopener');
 }
 assert.equal((html.match(/class="flavor"/g) || []).length, 6, 'Seis sabores devem permanecer disponíveis');
-assert.ok(!/<source\s+src=/.test(html), 'Vídeo não deve carregar antes do clique');
+assert.ok(!/<(?:video|source|dialog)\b/.test(html), 'O filme e seu diálogo foram removidos da LP');
 assert.ok(!/<iframe\b/.test(html), 'A LP não depende de incorporações externas');
 assert.ok(!/cup-3d\.js/.test(html), 'A prévia 3D deve permanecer separada');
 for (const [, value] of readFileSync(resolve(root, 'styles.css'), 'utf8').matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) {
   assert.ok(existsSync(resolve(root, value)), 'Ativo CSS ausente: ' + value);
 }
 execFileSync(process.execPath, ['--check', resolve(root, 'script.js')], {stdio: 'inherit'});
-console.log('OK: ' + references + ' referências locais, IDs, ARIA, seis sabores, imagens, mídia sob demanda e sintaxe JS.');
+console.log('OK: ' + references + ' referências locais, IDs, ARIA, seis sabores, imagens, ausência do filme e sintaxe JS.');

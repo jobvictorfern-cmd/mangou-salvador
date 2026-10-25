@@ -11,7 +11,7 @@ Conversão pretendida: abrir o cardápio, consultar o Instagram e traçar uma ro
 - Implementação: HTML semântico, CSS e JavaScript puro, sem framework nem etapa de build.
 - Fotografias e identidade: recolher e conferir materiais do perfil oficial; manter a procedência dos arquivos utilizados.
 - Conteúdo: não inventar avaliações, números comerciais, preços, ingredientes, horários ou telefone.
-- Hero: fotografia real do produto, conforme decisão nesta conversa. Vídeo como conteúdo complementar, com reprodução voluntária.
+- Hero: fotografia real do produto, conforme decisão nesta conversa. O componente de filme foi removido conforme a seção 15.
 - Preservar os seis sabores já informados pelo responsável, distinguindo receitas ainda não confirmadas.
 - Publicação: atualizar o repositório e o GitHub Pages existentes depois da validação.
 
@@ -72,7 +72,6 @@ Paleta interpretada das cores recorrentes do perfil e do logo já existente; nã
 | Hero | Frase da embalagem, produto recortado, sabores e localização | Imagem priorizada, SVG com nome acessível, ações visíveis |
 | Cardápio | Seis elementos `details` com ingredientes | Primeiro aberto; abertura pelo toque e teclado; uso sem JS |
 | Galeria | Fotos/capas reais ligadas aos Reels originais | Links com nome acessível, rolagem horizontal interna no celular |
-| Filme do produto | Abertura voluntária em `dialog`, com vídeo nativo | Abrir, reproduzir, pausar, fechar e devolver foco |
 | Localização | Foto do Farol, Maps, Waze e Instagram | Sem afirmar ponto ou horário exato não confirmado |
 
 ## 5. Estrutura final para implementação
@@ -80,7 +79,7 @@ Paleta interpretada das cores recorrentes do perfil e do logo já existente; nã
 1. Cabeçalho compacto: marca, navegação e acesso claro ao Instagram.
 2. Hero: “O que rima com / Manga verde e sal? / Lá ele!”, fotografia original recortada e ações “Escolher meu sabor” e “Onde encontrar”. A frase vem do rótulo visível na própria foto.
 3. Sabores: cardápio amarelo com seis opções, ingredientes em disclosure e acesso ao perfil para preços/disponibilidade.
-4. O rolê: três fotografias/capas reais, links para os Reels correspondentes e botão para o filme de produto existente.
+4. O rolê: três fotografias/capas reais e links para os Reels correspondentes, com acesso à matéria no Alô Alô Bahia.
 5. Localização e atendimento: “O encontro é na Barra.”, foto do Farol, rotas e confirmação de ponto/horário no Instagram.
 6. Rodapé: marca, navegação e fontes. Sem outro bloco repetindo a apresentação.
 
@@ -90,7 +89,7 @@ Evitar solicitar pedido ou pagamento se não existe fluxo real para isso. Não i
 
 - `index.html`: conteúdo, semântica, metadados e alternativas que continuam úteis sem JavaScript.
 - `styles.css`: tokens do sistema visual, base para 320 px e melhorias progressivas por largura.
-- `script.js`: somente comportamento necessário à navegação, sabores e controles de mídia.
+- `script.js`: comportamento do menu, ano do rodapé e WhatsApp opcional.
 - `assets/`: fotos, marca, fontes e mídia servidas localmente.
 - `SYSTEM DESIGN.MD`: decisões, fontes, etapas e evidências de validação.
 - `README.md`: instruções operacionais e manutenção da versão final.
@@ -106,7 +105,7 @@ As páginas e fontes da prévia 3D anterior não precisam ser apagadas para refa
 - Navegação por teclado, foco visível, rótulos acessíveis, textos alternativos e contraste legível.
 - Respeitar `prefers-reduced-motion`; não depender de animação para apresentar o produto.
 - Reservar as proporções das imagens para evitar saltos de layout.
-- Priorizar a foto do hero; adiar imagens secundárias e o download do vídeo.
+- Priorizar a foto do hero e adiar imagens secundárias. A LP não carrega vídeo.
 - Preservar o MP4 4K existente sem recompressão caso seja reutilizado, conforme preferência anterior do usuário.
 - Não inserir fotos de uma combinação como se comprovassem outra receita.
 
@@ -127,7 +126,7 @@ As páginas e fontes da prévia 3D anterior não precisam ser apagadas para refa
 | `assets/role-preparo.jpg` | https://www.instagram.com/conhecendosalvador_/reel/Dct_3Nshrob/ | Capa da publicação sobre o preparo |
 | `assets/logo.webp` | Marca já existente no projeto, compatível com o perfil conferido | Identidade |
 | `assets/farol-barra.webp` | Wikimedia, crédito mantido no README/rodapé | Referência de localização |
-| `assets/mangou-hero-4k.mp4` | Arquivo anteriormente enviado/aprovado pelo usuário | Filme do produto, aberto voluntariamente |
+| `assets/mangou-hero-4k.mp4` | Arquivo anteriormente enviado/aprovado pelo usuário | Ativo preservado, sem referência na LP após a seção 15 |
 
 As novas capas foram baixadas das URLs de imagem presentes no DOM público da grade. A resolução disponível é 360 × 640; por isso entram em formatos pequenos, não como hero ampliado. Os Reels completos não foram baixados: a galeria leva às publicações originais. O filme local existente permanece independente desses Reels. Não apresentar uma capa como se fosse um vídeo local novo.
 
@@ -145,8 +144,8 @@ Critérios usados na conferência. Os resultados executados estão nas seções 
 
 1. Sintaxe de JavaScript, integridade de referências locais, IDs e âncoras.
 2. Composição mobile/desktop e ausência de transbordamento horizontal.
-3. Menu, seleção de sabores, vídeo, links de rota e links de contato.
-4. Imagem principal carregada, proporções estáveis e vídeo sem download antecipado.
+3. Menu, seleção de sabores, links de rota e links de contato.
+4. Imagem principal carregada, proporções estáveis e ausência do componente de filme.
 5. Erros de console e recursos ausentes.
 6. Commit publicado, status do deploy e correspondência da página pública.
 
@@ -167,7 +166,7 @@ Testes no navegador não equivalem a teste em aparelho físico ou a um experimen
 - O CSS usa as próprias fontes locais existentes e não consulta Google Fonts durante a visita.
 - O CTA vem antes da foto no layout móvel; a ordem de leitura do HTML continua produto → descrição → ações. No desktop, texto e ações ficam à esquerda da fotografia.
 - O cardápio usa `details name="sabores"`; o navegador controla a expansão e oferece teclado sem código adicional. O comportamento continua útil em navegadores que permitem mais de um item aberto.
-- O `dialog` usa os controles nativos do vídeo. Ao fechar, a reprodução pausa e o foco retorna ao botão de abertura. Escape e clique no fundo também fecham o diálogo.
+- O componente de filme e seus controles foram removidos conforme a seção 15; os resultados históricos abaixo descrevem a versão anterior.
 - A pausa também ocorre diretamente no acionamento de fechar e no evento de Escape, antes do evento assíncrono `close`, para cobrir fechamento rápido enquanto a mídia ainda está carregando.
 - O MP4 só ganha uma URL de fonte depois do clique. O download de 18,8 MB não faz parte da carga inicial. O link direto continua disponível como alternativa quando JS/dialog não estão disponíveis.
 - Capas do Instagram são imagens locais. Não há iframe de Instagram, SDK de rede social, mapa incorporado, analytics ou rastreadores novos.
@@ -224,3 +223,16 @@ Implementação: fundo verde sólido; pergunta em papel claro e resposta amarela
 Validação local desta revisão: `node checks/site.mjs` passou; `git diff --check` sem erro de whitespace. Larguras 320, 360, 390, 430, 600, 800, 959, 960, 1024, 1440 e 1885 px, com fontes carregadas: sem transbordamento horizontal e com o título dentro da largura útil. Ações com aproximadamente 52 px e 44 px de altura. Recorte conferido visualmente em celular, transição de desktop e tela ampla. A fotografia e o MP4 não foram modificados; `script.js` permanece igual ao da versão aprovada. Mantêm-se os limites de validação da seção 12.
 
 Publicação da revisão: commit `a367f6dfd7e622744baa8172b69e6a0da99a0fd7`; GitHub Actions `40227874632` concluído com `success`. URL conferida: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=a367f6d. HTML, CSS v22 e fotografia retornaram HTTP 200. No navegador público em 390 px, fontes carregadas, novo título e fotografia corretos, sem transbordamento e sem fonte de vídeo atribuída antes do clique. As duas ações do hero chegaram às seções esperadas na verificação local. Evidências desta revisão em `verificacao/mangou-redesign/hero-campanha/`, na pasta acima do repositório.
+
+## 15. Remoção do filme da página
+
+25/10/2026 — Pedido do usuário: remover o elemento “Ver o filme da Mangou 00:08”, indicado em captura de tela. Plano registrado antes da alteração: retirar o acionador e sua alternativa sem JS, o diálogo de reprodução e o CSS/JavaScript que atendiam exclusivamente a esse componente. O MP4 original será preservado no repositório, sem referência na LP. Hero, cardápio, galeria e localização continuam na página.
+
+| Etapa | Estado |
+| --- | --- |
+| Registrar o pedido e o escopo | Concluída |
+| Remover componente e código associado | Concluída |
+| Conferir estrutura, menu e seção do rolê | Concluída |
+| Publicar e verificar o endereço público | Pendente |
+
+Resultado local: botão, alternativa direta, diálogo, símbolo de play e código exclusivo do filme removidos. CSS e JS versionados como v23 para evitar uso dos controles antigos em cache. `node checks/site.mjs` passou com 35 referências locais; sintaxe JS e `git diff --check` passaram. Navegador em 390 px: nenhum elemento de filme/diálogo, seis sabores preservados, menu abre e fecha com Escape, sem transbordamento e sem erros de console na rodada. Espaçamento da seção do rolê conferido visualmente. O arquivo MP4 não foi alterado.
