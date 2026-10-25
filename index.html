@@ -13,9 +13,9 @@
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preload" href="assets/display-v2.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css?v=13">
-  <link rel="stylesheet" href="cup-3d.css?v=2">
+  <link rel="stylesheet" href="cup-3d.css?v=3">
   <script src="script.js?v=13" defer></script>
-  <script type="module" src="cup-3d.js?v=1"></script>
+  <script type="module" src="cup-3d.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#principal">Pular para o conteúdo</a>
@@ -37,15 +37,10 @@
         
         <h1 id="hero-title">Seu rolê<br class="hero-break-desktop"> pede<br class="hero-break-mobile"> um<br class="hero-break-desktop"> <span class="highlight">Mangou</span><span class="hero-dot">.</span></h1>
         <div class="hero-3d-media cup-stage" data-mangou-3d data-state="loading" role="group" aria-label="Montagem do copo Mangou em 3D">
-          <img class="cup-fallback" src="assets/manga.webp" alt="Copo Mangou com manga fresca e limão" width="1200" height="1600">
+          <div class="cup-fallback" role="img" aria-label="Copo Mangou com manga fresca"></div>
           <canvas class="cup-canvas" role="img" aria-label="Copo transparente em 3D recebe tiras de manga, limão e tempero; a tampa se encaixa ao final"></canvas>
           <span class="cup-stage-status" data-cup-status aria-live="polite">Preparando seu Mangou…</span>
-          <div class="cup-toolbar">
-            <button type="button" data-cup-toggle aria-pressed="false">Pausar</button>
-            <button type="button" data-cup-replay aria-label="Reiniciar montagem" title="Reiniciar montagem">↻</button>
-            <input type="range" data-cup-seek min="0" max="100" step="0.1" value="0" aria-label="Progresso da montagem">
-            <button type="button" data-cup-photo aria-pressed="false">Ver foto</button>
-          </div>
+          <button class="cup-a11y-pause" type="button" data-cup-toggle aria-pressed="false">Pausar montagem do copo</button>
           <noscript><span class="cup-noscript">Manga fresca. Do seu jeito.</span></noscript>
         </div>
         <p class="hero-description">Manga fresca, limão e tempero. Seu rolê na Barra com mais sabor.</p>
