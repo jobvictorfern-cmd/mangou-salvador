@@ -54,10 +54,10 @@ Os fundos da faixa de sabores, da localização e da chamada final receberam gra
 
 O vídeo enviado pelo usuário substitui as animações do copo. A página abre com o vídeo; `?hero=foto` abre a fotografia original. Links anteriores com `?hero=montagem` ou `?hero=montagem-original` também exibem o vídeo. O vídeo reproduz uma vez e mantém o último quadro, com controles de pausa, reprodução e repetição. Se o navegador bloquear a reprodução automática, o mesmo botão permite iniciá-la. A foto continua disponível pelo botão “Ver foto”.
 
-A versão atual usa `assets/mangou-hero-4k.webm`, em WebM/VP9, 3840 × 2160, 24 fps e 8 segundos. A fonte é a versão 4K de “MANGOU_food_commercial_production_20261025001208.mp4”, ampliada do original em 1280 × 720 com Lanczos e nitidez suave. Trata-se de upscale, sem novos detalhes de captura nativa em 4K.
+A versão atual usa `assets/mangou-hero-original.mp4`, uma cópia exata de “MANGOU_food_commercial_production_20261025001208.mp4”, enviado pelo usuário: H.264, 1280 × 720, 24 fps e 8 segundos. O arquivo mantém os bytes originais, sem upscale, conversão ou recompressão; sua integridade foi conferida por SHA-256.
 
-A conversão para WebM usa qualidade constante (CRF 28), sem reduzir resolução ou taxa de quadros. A faixa de áudio foi removida da cópia usada no hero, que reproduz sem som. O MP4 original e sua versão 4K com áudio permanecem fora do repositório. Os arquivos de mídia usam novos nomes para evitar a reutilização do vídeo anterior pelo cache do navegador.
+A faixa de áudio original está preservada no arquivo. A reprodução no hero permanece silenciosa pelo atributo `muted`. Os arquivos de mídia usam novos nomes para evitar a reutilização da versão anterior pelo cache do navegador.
 
-`assets/mangou-hero-poster-4k.webp` é o primeiro quadro do novo vídeo, exportado em 1920 × 1080. No desktop, o vídeo preenche o hero com o produto deslocado para a direita e um gradiente preserva o contraste do texto. No celular, o vídeo é exibido inteiro em 16:9 abaixo do texto, preservando a composição original. O vídeo usa `autoplay muted playsinline`.
+`assets/mangou-hero-poster-original.webp` é o primeiro quadro do vídeo original, exportado em WebP sem perdas e sem redimensionamento, em 1280 × 720. No desktop, o vídeo preenche o hero com o produto deslocado para a direita e um gradiente preserva o contraste do texto. No celular, o vídeo é exibido inteiro em 16:9 abaixo do texto, preservando a composição original. O vídeo usa `autoplay muted playsinline`.
 
 A chamada final com tiras fotográficas de manga permanece independente do hero. A faixa xadrez fica apenas na base da seção de localização.
