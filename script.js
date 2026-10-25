@@ -38,18 +38,18 @@ window.matchMedia('(min-width: 801px)').addEventListener('change', event => { if
 
 const flavors = {
   classico: {
-    profile: 'CÍTRICO & FAMILIAR', title: 'Limão, sal\ne boas memórias.',
-    description: 'A combinação que não precisa de apresentação. Manga fresca, a acidez do limão e o sal que dá aquele toque. Tem gosto de infância, de verão e de quero mais.',
+    profile: 'CÍTRICO & FAMILIAR', title: 'O clássico.',
+    description: 'Aquele gostinho de infância, com limão e sal.',
     ingredients: ['Manga', 'Limão', 'Sal'], image: 'assets/manga.webp', alt: 'Copo de manga fresca com limão da Mangou', tag: 'O GOSTINHO DE INFÂNCIA'
   },
   fumace: {
-    profile: 'DEFUMADO & MARCANTE', title: 'Fumacê.\nSabor que chega junto.',
-    description: 'Limão, páprica, pimenta-do-reino e Fumacê em pó. Uma combinação com toque defumado para quem quer descobrir outro jeito de comer manga.',
+    profile: 'DEFUMADO & MARCANTE', title: 'O defumado.',
+    description: 'Um toque defumado para sair do clássico.',
     ingredients: ['Manga', 'Limão', 'Páprica', 'Pimenta-do-reino', 'Fumacê em pó'], image: 'assets/manga.webp', alt: 'Manga fresca da Mangou; foto ilustrativa da apresentação no copo', tag: 'CONHEÇA O TOQUE DEFUMADO'
   },
   misere: {
-    profile: 'CÍTRICO & PICANTE', title: 'Miserê.\nÉ de fazer salivar.',
-    description: 'Aqui o Tajín entra na resenha: uma mistura de pimentas, limão e sal que dá uma picância gostosa à manga. Para quem gosta de um sabor que chega chegando.',
+    profile: 'CÍTRICO & PICANTE', title: 'O picante.',
+    description: 'Tajín, limão e uma picância que chega junto.',
     ingredients: ['Manga', 'Tajín', 'Pimentas', 'Limão', 'Sal'], image: 'assets/tajin.webp', alt: 'Publicação oficial da Mangou apresentando o Tajín e o copo de manga temperada', tag: 'TAJÍN NO TEMPERO'
   }
 };

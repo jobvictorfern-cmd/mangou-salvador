@@ -15,7 +15,7 @@ Abra `index.html` no navegador ou sirva a raiz do repositório com qualquer serv
 
 ## Decisões de conteúdo e conversão
 
-O hero apresenta o vídeo em 16:9 logo abaixo do título no celular e como fundo no desktop. A fotografia real do produto permanece como alternativa pelo controle “Ver foto”. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile, as abas e as perguntas frequentes são operacionais. Não há checkout, envio de pedidos ou formulário com armazenamento.
+O hero apresenta o vídeo em 16:9 logo abaixo do título no celular e como fundo no desktop. A fotografia real do produto permanece como alternativa pelo controle “Ver foto”. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile e as abas de sabores são operacionais. Os textos foram reduzidos e a seção de perguntas frequentes foi removida para evitar repetição. Não há checkout, envio de pedidos ou formulário com armazenamento.
 
 O material usa as cores verde e amarelo da marca. Não inclui depoimentos inventados, contadores, selos comerciais, preços desatualizados, telefone não confirmado ou horário fixo. A comunicação de atendimento direciona aos Stories. Melhorar a conversão é um objetivo do projeto, não um resultado medido ou garantido.
 
@@ -23,7 +23,7 @@ O cardápio mostra três combinações verificadas. Limão e sal descreve a comb
 
 ## Layout mobile first
 
-O CSS base atende telas a partir de 320 px em uma coluna, com áreas de toque de pelo menos 44 px nos controles principais. As media queries por largura mínima acrescentam colunas a partir de 600 px e navegação de desktop a partir de 801 px. A chamada fixa reserva espaço no rodapé e respeita a área segura inferior do aparelho. O vídeo MP4 4K é o mesmo em todos os tamanhos, sem recompressão; seu arquivo de 18.8 MB exige mais dados em conexões móveis.
+O CSS base atende telas a partir de 320 px em uma coluna, com áreas de toque de pelo menos 44 px nos controles principais. Até 800 px, as etapas e os sabores ficam em uma coluna; as abas de sabores aparecem antes da fotografia. A navegação de desktop entra a partir de 801 px. O título inicial usa duas linhas no celular, o vídeo mantém a proporção 16:9 e os botões principais têm pelo menos 52 px de altura. A chamada flutuante “Bora de Mangou” foi removida para não cobrir o conteúdo. O vídeo MP4 4K é o mesmo em todos os tamanhos, sem recompressão; seu arquivo de 18.8 MB exige mais dados em conexões móveis.
 
 ## Fontes
 
@@ -40,7 +40,7 @@ Altere as chamadas e os links no HTML. As descrições dos sabores também estã
 
 ## WhatsApp e localização
 
-O botão flutuante usa a cor e o símbolo do WhatsApp. O usuário optou por configurar o número depois. Preencha `WHATSAPP_NUMBER` no início de `script.js` com DDI, DDD e número. Enquanto estiver vazio, o botão permanece sem navegação, com estado acessível de indisponível; não há número fictício.
+O botão flutuante usa a cor e o símbolo do WhatsApp. O usuário optou por configurar o número depois. Preencha `WHATSAPP_NUMBER` no início de `script.js` com DDI, DDD e número. Enquanto estiver vazio, o botão fica oculto; não há número fictício.
 
 Os botões “Venha de Waze” e “Venha de Maps” levam ao Farol da Barra como referência de localização. O mapa incorporado utiliza o mesmo destino. O ponto exato da Mangou deve ser confirmado nos Stories. Endereço do Farol: https://www.salvadordabahia.com/experiencias/farol-da-barra/
 
