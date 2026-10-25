@@ -233,7 +233,7 @@ Publicação da revisão: commit `a367f6dfd7e622744baa8172b69e6a0da99a0fd7`; Git
 | Registrar o pedido e o escopo | Concluída |
 | Remover componente e código associado | Concluída |
 | Conferir estrutura, menu e seção do rolê | Concluída |
-| Publicar e verificar o endereço público | Pendente |
+| Publicar e verificar o endereço público | Concluída |
 
 Resultado local: botão, alternativa direta, diálogo, símbolo de play e código exclusivo do filme removidos. CSS e JS versionados como v23 para evitar uso dos controles antigos em cache. `node checks/site.mjs` passou com 35 referências locais; sintaxe JS e `git diff --check` passaram. Navegador em 390 px: nenhum elemento de filme/diálogo, seis sabores preservados, menu abre e fecha com Escape, sem transbordamento e sem erros de console na rodada. Espaçamento da seção do rolê conferido visualmente. O arquivo MP4 não foi alterado.
 
@@ -241,4 +241,6 @@ Resultado local: botão, alternativa direta, diálogo, símbolo de play e códig
 
 25/10/2026 — O usuário também solicitou remover “Saiu no Alô Alô Bahia”. Plano: retirar o link, seu contêiner agora vazio, a linha divisória e os estilos exclusivos desse bloco. Preservar a galeria e seu espaçamento de seção.
 
-Implementação e conferência local concluídas: link, contêiner e regras CSS exclusivos removidos; CSS v24. Verificação estrutural passou com 34 referências locais, sem erro de whitespace. Navegador em 390 px: três fotografias da galeria preservadas, sem chamada de imprensa, sem filme, sem transbordamento e com a transição para localização conferida visualmente. Publicação e conferência pública em andamento.
+Implementação e conferência local concluídas: link, contêiner e regras CSS exclusivos removidos; CSS v24. Verificação estrutural passou com 34 referências locais, sem erro de whitespace. Navegador em 390 px: três fotografias da galeria preservadas, sem chamada de imprensa, sem filme, sem transbordamento e com a transição para localização conferida visualmente.
+
+As duas remoções foram publicadas nos commits `843c1f12f1eac349e13996ff9471230c0f51dcaf` e `7786ed3787812ced6a2f40cf10f8325969896848`. GitHub Pages: execução `40228350267`, resultado `success`. Endereço conferido: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=7786ed3. HTTP 200; HTML público com CSS v24 e JS v23, sem os dois componentes. Conferência pública em 390 px confirmou ausência das chamadas, três fotografias e largura útil igual à do documento. Etapas das seções 15 e 16 concluídas.
