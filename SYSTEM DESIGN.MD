@@ -21,7 +21,7 @@ Conversão pretendida: abrir o cardápio, consultar o Instagram e traçar uma ro
 - Base da reconstrução: commit `57b37f60c55f784d91ff2abadbe2926f664c3d77`; cópia local sincronizada com `origin/main` no início desta etapa.
 - Perfil oficial acessado no navegador: https://www.instagram.com/mangou.salvador/
 - Bio observada: “Manga Fresca, Sabor que Vicia”; sábados e domingos na Barra, Salvador; dias adicionais avisados nos Stories.
-- O perfil público apresenta fotografias, artes e Reels. A seleção visual e a coleta de mídia estão em andamento.
+- O perfil público apresenta fotografias, artes e Reels. A seleção e a coleta utilizadas nesta versão estão registradas na seção 8.
 - WhatsApp oficial ainda não configurado no projeto. A ação de contato permanece direcionada ao Instagram até haver número confirmado.
 
 ## 3. Plano por etapas
@@ -33,7 +33,7 @@ Conversão pretendida: abrir o cardápio, consultar o Instagram e traçar uma ro
 | 2. Estrutura e conteúdo | HTML completo e fluxos de navegação | Conteúdo curto, ações reais, sem informação comercial presumida | Concluída |
 | 3. Design e interações | CSS mobile first e JS necessário | Layout completo no celular e desktop, componentes operacionais | Concluída |
 | 4. Validação | Conferência visual, interações, mídia e acessibilidade | Verificações executadas e resultados/limites registrados | Concluída |
-| 5. Publicação | Commit, push e GitHub Pages | Deploy concluído e versão pública conferida | Em andamento |
+| 5. Publicação | Commit, push e GitHub Pages | Deploy concluído e versão pública conferida | Concluída |
 
 Cada etapa atualiza este documento antes da seguinte. Uma falha observada deve ser corrigida ou registrada como limitação; uma etapa não será marcada como concluída apenas porque o código foi escrito.
 
@@ -131,7 +131,7 @@ As páginas e fontes da prévia 3D anterior não precisam ser apagadas para refa
 
 As novas capas foram baixadas das URLs de imagem presentes no DOM público da grade. A resolução disponível é 360 × 640; por isso entram em formatos pequenos, não como hero ampliado. Os Reels completos não foram baixados: a galeria leva às publicações originais. O filme local existente permanece independente desses Reels. Não apresentar uma capa como se fosse um vídeo local novo.
 
-### Pesquisa de design iniciada
+### Referências de design consultadas
 
 - Ma‘ono: https://www.maonoseattle.com/
 - Fishwife: https://eatfishwife.com/
@@ -141,7 +141,7 @@ Ma‘ono: título forte, fotografia próxima do alimento e navegação curta. Fi
 
 ## 9. Validação e publicação
 
-Resultados ainda pendentes para a nova versão. A conferência deve registrar:
+Critérios usados na conferência. Os resultados executados estão nas seções 12 e 13:
 
 1. Sintaxe de JavaScript, integridade de referências locais, IDs e âncoras.
 2. Composição mobile/desktop e ausência de transbordamento horizontal.
@@ -160,6 +160,7 @@ Testes no navegador não equivalem a teste em aparelho físico ou a um experimen
 - 25/10/2026 — Etapa 3: CSS refeito com tokens, base de uma coluna, cardápio amarelo, fotografia em moldura, xadrez e composição desktop a partir de 960 px. No celular, a ação principal foi posicionada antes da fotografia: em 390 × 844 px, seu topo ficou em aproximadamente 292 px, visível na primeira tela. Menu, vídeo em diálogo e configuração opcional do WhatsApp implementados em JS puro. Ingredientes e créditos usam controles HTML nativos. Sem animação contínua, bibliotecas ou dependências novas.
 - 25/10/2026 — Início da etapa 4: enquadramento conferido no navegador. A primeira passagem encontrou o título alguns pixels além da coluna desktop; a escala foi reduzida para corrigir esse limite antes da rodada final. Vídeo permanece sem atributo `src` até a abertura voluntária.
 - 25/10/2026 — Etapa 4 concluída: verificações estruturais, contraste dos tokens, 11 larguras, navegação, ingredientes, mídia e revisão visual realizadas. Fechamento rápido do filme também conferido: diálogo fechado, vídeo pausado, rolagem liberada e foco no acionador. README atualizado para a nova manutenção. Resultados e limites na seção 12. Publicação iniciada após essas verificações.
+- 25/10/2026 — Etapa 5 concluída: código enviado ao GitHub, deploy do Pages finalizado com sucesso e página pública verificada por HTTP e no navegador. Este registro final é publicado em um commit separado da implementação.
 
 ## 11. Decisões de implementação
 
@@ -192,3 +193,15 @@ Testes no navegador não equivalem a teste em aparelho físico ou a um experimen
 Os resultados de contraste cobrem esses pares de cores, não constituem auditoria completa de acessibilidade. A validação visual foi feita no navegador com viewports ajustados; não foi realizada em aparelho físico. A alternativa sem JavaScript foi conferida estruturalmente, sem uma sessão de navegador com JS desativado. Não há experimento A/B, analytics novo ou conversão medida.
 
 Evidências locais: `verificacao/mangou-redesign/` na pasta de trabalho acima do repositório, incluindo pesquisa de mídia e resultados responsivos. Essas evidências não são dependências da página publicada.
+
+## 13. Publicação verificada
+
+- Documento inicial criado e commitado antes da implementação: `19ef4f1`.
+- Implementação publicada: `cc4fe4a4760732f0fcd8c85e1ee6c30749149aca`.
+- GitHub Actions: execução `40225562142`, workflow `pages build and deployment`, resultado `success`.
+- URL da versão: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=cc4fe4a
+- HTTP 200 para HTML, CSS v20, JavaScript v21 e as quatro novas imagens.
+- Navegador público em 390 × 844 px: identidade nova, fotografia correta, seis sabores e fonte do vídeo ainda ausente antes do clique. Menu e abertura de Xodó conferidos; ingredientes mostrados corretamente. Após o carregamento das fontes, largura do documento igual à largura útil, sem transbordamento.
+- O arquivo MP4 continua sendo o ativo anterior, e a nova página permanece em HTML, CSS e JS, sem framework ou dependências novas de runtime.
+
+Todas as etapas previstas neste documento foram executadas. Permanecem os limites explicitados na seção 12: aparelhos físicos, auditoria completa de acessibilidade e resultados reais de conversão não foram verificados.
