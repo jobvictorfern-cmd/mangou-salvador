@@ -11,11 +11,15 @@ Abra `index.html` no navegador ou sirva a raiz do repositório com qualquer serv
 - `index.html`: conteúdo, navegação e SEO básico.
 - `styles.css`: estilos mobile first, layout responsivo e fontes locais.
 - `script.js`: menu mobile, abas de sabores com teclado e créditos.
+- `cup-3d.js` e `cup-3d.css`: cena, montagem e controles 3D.
+- `cup-software.js`: projeção da mesma cena no Canvas em aparelhos sem WebGL.
+- `animacao-3d.html`: página dedicada à prévia interativa.
+- `assets/vendor`: Three.js r170 e sua licença MIT, servidos localmente.
 - `assets`: fotografias otimizadas em WebP, marca, favicon e fontes.
 
 ## Decisões de conteúdo e conversão
 
-O hero apresenta o vídeo em 16:9 logo abaixo do título no celular e como fundo no desktop. A fotografia real do produto permanece como alternativa pelo controle “Ver foto”. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile e as abas de sabores são operacionais. Os textos foram reduzidos e a seção de perguntas frequentes foi removida para evitar repetição. Não há checkout, envio de pedidos ou formulário com armazenamento.
+O hero apresenta uma montagem 3D procedural do copo com manga, tempero, limão e tampa. A fotografia real do produto permanece como alternativa pelo controle “Ver foto”. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile e as abas de sabores são operacionais. Os textos foram reduzidos e a seção de perguntas frequentes foi removida para evitar repetição. Não há checkout, envio de pedidos ou formulário com armazenamento.
 
 O material usa as cores verde e amarelo da marca. Não inclui depoimentos inventados, contadores, selos comerciais, preços desatualizados, telefone não confirmado ou horário fixo. A comunicação de atendimento direciona aos Stories. Melhorar a conversão é um objetivo do projeto, não um resultado medido ou garantido.
 
@@ -23,7 +27,7 @@ O cardápio mostra três combinações verificadas. Limão e sal descreve a comb
 
 ## Layout mobile first
 
-O CSS base atende telas a partir de 320 px em uma coluna, com áreas de toque de pelo menos 44 px nos controles principais. Até 800 px, as etapas e os sabores ficam em uma coluna; as abas de sabores aparecem antes da fotografia. A navegação de desktop entra a partir de 801 px. O título inicial usa duas linhas no celular, o vídeo mantém a proporção 16:9 e os botões principais têm pelo menos 52 px de altura. A chamada flutuante “Bora de Mangou” foi removida para não cobrir o conteúdo. O vídeo MP4 4K é o mesmo em todos os tamanhos, sem recompressão; seu arquivo de 18.8 MB exige mais dados em conexões móveis.
+O CSS base atende telas a partir de 320 px em uma coluna, com áreas de toque de pelo menos 44 px nos controles principais. Até 800 px, as etapas e os sabores ficam em uma coluna; as abas de sabores aparecem antes da fotografia. A navegação de desktop entra a partir de 801 px. O título inicial usa duas linhas no celular, a cena 3D tem enquadramento próprio e os botões principais têm pelo menos 52 px de altura. A chamada flutuante “Bora de Mangou” foi removida para não cobrir o conteúdo. O MP4 anterior está preservado em `assets`, mas não é carregado pela página. A cena atual usa a biblioteca local e geometrias geradas por código, sem downloads de modelos externos.
 
 ## Fontes
 
@@ -54,14 +58,12 @@ O arquivo `assets/mango-strips-real.webp` é uma imagem gerada com a ferramenta 
 
 Os fundos da faixa de sabores, da localização e da chamada final receberam granulação de papel e fibras sutis. O ativo local `assets/paper-grain.svg` utiliza ruído estático reproduzível e mistura suave com as cores existentes. O padrão xadrez aparece em uma faixa estreita na base da seção de localização. A referência é o post da Mangou fornecido pelo usuário. Textos e botões permanecem em camadas de leitura separadas do padrão.
 
-## Hero com vídeo
+## Montagem 3D do copo
 
-O vídeo enviado pelo usuário substitui as animações do copo. A página abre com o vídeo; `?hero=foto` abre a fotografia original. Links anteriores com `?hero=montagem` ou `?hero=montagem-original` também exibem o vídeo. O vídeo reproduz uma vez e mantém o último quadro, com controles de pausa, reprodução e repetição. Se o navegador bloquear a reprodução automática, o mesmo botão permite iniciá-la. A foto continua disponível pelo botão “Ver foto”.
+O copo é uma malha de revolução com paredes de PET, borda, frisos e tampa abobadada. O logo original é aplicado em uma superfície curva. A manga usa 330 instâncias de uma geometria fina e curva, com variações de cor e textura procedural. O movimento é coreografado, sem motor de colisões: entrada do copo, queda da manga, tempero e limão, encaixe da tampa e rotação final suave.
 
-A versão atual usa `assets/mangou-hero-4k.mp4`, uma cópia exata de “MANGOU_food_commercial_production_20261025001208_4K.mp4”: H.264, 3840 × 2160, 24 fps, 8 segundos e 18.8 MB. Essa é a versão 4K gerada anteriormente a partir do vídeo enviado pelo usuário, com upscale Lanczos e nitidez suave. O arquivo 4K foi copiado sem nova conversão ou recompressão; sua integridade foi conferida por SHA-256.
+A sequência dura 11,5 segundos e toca uma vez. Os controles permitem pausar, repetir, arrastar o progresso e alternar para a fotografia real. Ao sair da tela ou ocultar a aba, a renderização para; ao concluir a montagem, também não há loop contínuo. A densidade de pixels é limitada a 1,5 no celular e 2 no desktop. Com preferência por movimento reduzido, a página começa com o copo pronto; o visitante pode iniciar a sequência manualmente.
 
-A faixa de áudio original está preservada no arquivo. A reprodução no hero permanece silenciosa pelo atributo `muted`. Os arquivos de mídia usam novos nomes para evitar a reutilização da versão anterior pelo cache do navegador.
+Three.js r170 é servido de `assets/vendor/three.module.min.js`, sem CDN. Se WebGL não estiver disponível, `cup-software.js` projeta as mesmas coordenadas e instâncias 3D no Canvas 2D, com iluminação simplificada. Se ambos falharem, permanece a fotografia real. Essa primeira versão é uma interpretação tridimensional do produto, sem captura volumétrica ou promessa de fidelidade fotográfica.
 
-`assets/mangou-hero-poster-4k-mp4.webp` é o primeiro quadro do MP4 4K, exportado em WebP em 3840 × 2160. No desktop, o vídeo preenche o hero com o produto deslocado para a direita e um gradiente preserva o contraste do texto. No celular, o vídeo é exibido inteiro em 16:9 logo abaixo do título, preservando a composição original. O vídeo usa `autoplay muted playsinline`.
-
-A chamada final com tiras fotográficas de manga permanece independente do hero. A faixa xadrez fica apenas na base da seção de localização.
+Validação: sintaxe dos módulos; controles de progresso, repetição e alternância com a foto; renderização alternativa sem GPU; verificação dos vértices da manga dentro do copo concluído. O navegador de testes não oferece WebGL, portanto materiais físicos e reflexos da versão com GPU ainda precisam de conferência em um aparelho com WebGL.
