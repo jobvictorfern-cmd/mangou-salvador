@@ -217,8 +217,10 @@ Direção: trocar a composição de foto inclinada + marca-texto + selo por uma 
 | Registrar diagnóstico, referência e escopo | Concluída |
 | Compor o novo hero com os ativos existentes | Concluída |
 | Conferir recorte, celular, desktop e links | Concluída |
-| Publicar e conferir a versão pública | Pendente |
+| Publicar e conferir a versão pública | Concluída |
 
 Implementação: fundo verde sólido; pergunta em papel claro e resposta amarela; copo e mão recortados por `clipPath` SVG inline. `assets/manga.webp` permanece intacto e recebe preload prioritário. O SVG possui nome acessível via `title`. No celular, a ação de sabores aparece antes da fotografia; em desktop, texto e produto dividem a abertura. A foto não anima e não depende de JavaScript.
 
 Validação local desta revisão: `node checks/site.mjs` passou; `git diff --check` sem erro de whitespace. Larguras 320, 360, 390, 430, 600, 800, 959, 960, 1024, 1440 e 1885 px, com fontes carregadas: sem transbordamento horizontal e com o título dentro da largura útil. Ações com aproximadamente 52 px e 44 px de altura. Recorte conferido visualmente em celular, transição de desktop e tela ampla. A fotografia e o MP4 não foram modificados; `script.js` permanece igual ao da versão aprovada. Mantêm-se os limites de validação da seção 12.
+
+Publicação da revisão: commit `a367f6dfd7e622744baa8172b69e6a0da99a0fd7`; GitHub Actions `40227874632` concluído com `success`. URL conferida: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=a367f6d. HTML, CSS v22 e fotografia retornaram HTTP 200. No navegador público em 390 px, fontes carregadas, novo título e fotografia corretos, sem transbordamento e sem fonte de vídeo atribuída antes do clique. As duas ações do hero chegaram às seções esperadas na verificação local. Evidências desta revisão em `verificacao/mangou-redesign/hero-campanha/`, na pasta acima do repositório.
