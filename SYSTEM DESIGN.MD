@@ -79,7 +79,7 @@ Paleta interpretada das cores recorrentes do perfil e do logo já existente; nã
 1. Cabeçalho compacto: marca, navegação e acesso claro ao Instagram.
 2. Hero: “O que rima com / Manga verde e sal? / Lá ele!”, fotografia original recortada e ações “Escolher meu sabor” e “Onde encontrar”. A frase vem do rótulo visível na própria foto.
 3. Sabores: cardápio amarelo com seis opções, ingredientes em disclosure e acesso ao perfil para preços/disponibilidade.
-4. O rolê: três fotografias/capas reais e links para os Reels correspondentes, com acesso à matéria no Alô Alô Bahia.
+4. O rolê: três fotografias/capas reais e links para os Reels correspondentes.
 5. Localização e atendimento: “O encontro é na Barra.”, foto do Farol, rotas e confirmação de ponto/horário no Instagram.
 6. Rodapé: marca, navegação e fontes. Sem outro bloco repetindo a apresentação.
 
@@ -236,3 +236,9 @@ Publicação da revisão: commit `a367f6dfd7e622744baa8172b69e6a0da99a0fd7`; Git
 | Publicar e verificar o endereço público | Pendente |
 
 Resultado local: botão, alternativa direta, diálogo, símbolo de play e código exclusivo do filme removidos. CSS e JS versionados como v23 para evitar uso dos controles antigos em cache. `node checks/site.mjs` passou com 35 referências locais; sintaxe JS e `git diff --check` passaram. Navegador em 390 px: nenhum elemento de filme/diálogo, seis sabores preservados, menu abre e fecha com Escape, sem transbordamento e sem erros de console na rodada. Espaçamento da seção do rolê conferido visualmente. O arquivo MP4 não foi alterado.
+
+## 16. Remoção da chamada de imprensa
+
+25/10/2026 — O usuário também solicitou remover “Saiu no Alô Alô Bahia”. Plano: retirar o link, seu contêiner agora vazio, a linha divisória e os estilos exclusivos desse bloco. Preservar a galeria e seu espaçamento de seção.
+
+Implementação e conferência local concluídas: link, contêiner e regras CSS exclusivos removidos; CSS v24. Verificação estrutural passou com 34 referências locais, sem erro de whitespace. Navegador em 390 px: três fotografias da galeria preservadas, sem chamada de imprensa, sem filme, sem transbordamento e com a transição para localização conferida visualmente. Publicação e conferência pública em andamento.
