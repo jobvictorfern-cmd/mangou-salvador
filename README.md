@@ -9,17 +9,21 @@ Abra `index.html` no navegador ou sirva a raiz do repositório com qualquer serv
 ## Arquivos
 
 - `index.html`: conteúdo, navegação e SEO básico.
-- `styles.css`: estilos, layout responsivo e fontes locais.
+- `styles.css`: estilos mobile first, layout responsivo e fontes locais.
 - `script.js`: menu mobile, abas de sabores com teclado e créditos.
 - `assets`: fotografias otimizadas em WebP, marca, favicon e fontes.
 
 ## Decisões de conteúdo e conversão
 
-O hero usa a fotografia real do produto como fundo de toda a seção. O contraste sobre a foto preserva a leitura. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile, as abas e as perguntas frequentes são operacionais. Não há checkout, envio de pedidos ou formulário com armazenamento.
+O hero apresenta o vídeo em 16:9 logo abaixo do título no celular e como fundo no desktop. A fotografia real do produto permanece como alternativa pelo controle “Ver foto”. As chamadas conduzem aos sabores, às informações de atendimento e ao Instagram real da empresa. O menu mobile, as abas e as perguntas frequentes são operacionais. Não há checkout, envio de pedidos ou formulário com armazenamento.
 
 O material usa as cores verde e amarelo da marca. Não inclui depoimentos inventados, contadores, selos comerciais, preços desatualizados, telefone não confirmado ou horário fixo. A comunicação de atendimento direciona aos Stories. Melhorar a conversão é um objetivo do projeto, não um resultado medido ou garantido.
 
 O cardápio mostra três combinações verificadas. Limão e sal descreve a combinação e não presume um nome comercial. Miserê e seu uso de Tajín foram observados no perfil oficial. Os ingredientes de Fumacê foram descritos na matéria indicada abaixo. A foto de manga usada ao apresentar Fumacê ilustra o formato do produto, sem afirmar que mostra essa receita. Todas as linhas de apoio acima dos títulos foram removidas.
+
+## Layout mobile first
+
+O CSS base atende telas a partir de 320 px em uma coluna, com áreas de toque de pelo menos 44 px nos controles principais. As media queries por largura mínima acrescentam colunas a partir de 600 px e navegação de desktop a partir de 801 px. A chamada fixa reserva espaço no rodapé e respeita a área segura inferior do aparelho. O vídeo MP4 4K é o mesmo em todos os tamanhos, sem recompressão; seu arquivo de 18.8 MB exige mais dados em conexões móveis.
 
 ## Fontes
 
@@ -58,6 +62,6 @@ A versão atual usa `assets/mangou-hero-4k.mp4`, uma cópia exata de “MANGOU_f
 
 A faixa de áudio original está preservada no arquivo. A reprodução no hero permanece silenciosa pelo atributo `muted`. Os arquivos de mídia usam novos nomes para evitar a reutilização da versão anterior pelo cache do navegador.
 
-`assets/mangou-hero-poster-4k-mp4.webp` é o primeiro quadro do MP4 4K, exportado em WebP em 3840 × 2160. No desktop, o vídeo preenche o hero com o produto deslocado para a direita e um gradiente preserva o contraste do texto. No celular, o vídeo é exibido inteiro em 16:9 abaixo do texto, preservando a composição original. O vídeo usa `autoplay muted playsinline`.
+`assets/mangou-hero-poster-4k-mp4.webp` é o primeiro quadro do MP4 4K, exportado em WebP em 3840 × 2160. No desktop, o vídeo preenche o hero com o produto deslocado para a direita e um gradiente preserva o contraste do texto. No celular, o vídeo é exibido inteiro em 16:9 logo abaixo do título, preservando a composição original. O vídeo usa `autoplay muted playsinline`.
 
 A chamada final com tiras fotográficas de manga permanece independente do hero. A faixa xadrez fica apenas na base da seção de localização.
