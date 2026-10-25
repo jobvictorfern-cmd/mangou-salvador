@@ -12,9 +12,10 @@
   <title>Mangou Salvador — Manga fresca, sabor que vicia</title>
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preload" href="assets/display-v2.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/manga.webp" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=26">
-  <script src="script.js?v=26" defer></script>
+  <link rel="preload" href="assets/copo-parallax.png" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=27">
+  <script src="script.js?v=27" defer></script>
+  <script src="hero-parallax.js?v=27" defer></script>
 </head>
 <body>
   <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0"><defs>
@@ -70,12 +71,10 @@
       <div class="container hero-layout">
         <div class="hero-heading"><p class="hero-intro">O que rima com</p><h1 id="hero-title"><span class="hero-question">Manga verde<br>e sal?</span><span class="hero-answer">Lá ele!</span></h1></div>
         <figure class="hero-product">
-          <svg viewBox="280 460 920 1140" width="920" height="1140" role="img" aria-labelledby="hero-product-title" xmlns="http://www.w3.org/2000/svg">
-            <title id="hero-product-title">Fotografia original de um copo cheio de manga da Mangou, segurado na mão</title>
-            <defs><clipPath id="hero-product-mask"><path d="M527 519C449 516 391 556 373 617L362 649C349 656 345 674 351 689L374 699 379 716C356 714 340 728 341 753L346 785 350 830 355 872C346 899 339 936 345 970C349 1001 370 1027 397 1048C391 1067 388 1086 391 1108C397 1148 414 1184 438 1208C479 1245 521 1260 575 1280C645 1303 685 1331 737 1370L1010 1610 1230 1610 1230 1342C1159 1329 1099 1301 1040 1265C1004 1243 949 1225 909 1202C862 1175 830 1153 819 1113C810 1070 808 1020 797 976C789 938 780 904 765 869C748 828 728 793 716 757L713 710C711 701 700 696 687 696C674 697 665 705 658 716L660 679C678 672 685 653 674 641L655 627C636 554 586 524 527 519Z"/></clipPath></defs>
-            <image href="assets/manga.webp" width="1200" height="1600" clip-path="url(#hero-product-mask)"/>
-          </svg>
+          <div class="hero-product-motion" id="hero-cup"><img src="assets/copo-parallax.png" alt="Copo Mangou com manga verde e sal, em embalagem transparente" width="1122" height="1402" fetchpriority="high" decoding="async"></div>
         </figure>
+        <button class="hero-sensor-toggle" type="button" aria-controls="hero-cup" hidden>Ativar movimento</button>
+        <span class="sensor-status" role="status" aria-live="polite"></span>
         <button class="hero-motion-toggle" type="button" aria-label="Pausar queda dos fios de manga" aria-controls="mango-rain" hidden><span class="motion-pause" aria-hidden="true">Ⅱ</span><span class="motion-play" aria-hidden="true">▶</span></button>
         <div class="hero-copy">
           <p>Manga fresca, limão e tempero do seu jeito.<br>Da Barra, pra ir com você.</p>

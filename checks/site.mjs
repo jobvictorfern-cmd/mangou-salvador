@@ -33,4 +33,5 @@ for (const [, value] of readFileSync(resolve(root, 'styles.css'), 'utf8').matchA
   assert.ok(existsSync(resolve(root, value)), 'Ativo CSS ausente: ' + value);
 }
 execFileSync(process.execPath, ['--check', resolve(root, 'script.js')], {stdio: 'inherit'});
+execFileSync(process.execPath, ['--check', resolve(root, 'hero-parallax.js')], {stdio: 'inherit'});
 console.log('OK: ' + references + ' referências locais, IDs, ARIA, seis sabores, imagens, ausência do filme e sintaxe JS.');

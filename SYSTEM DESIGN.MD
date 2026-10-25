@@ -60,7 +60,7 @@ Paleta interpretada das cores recorrentes do perfil e do logo já existente; nã
 - Corpo: DM Sans local, base 16 px e entrelinha de pelo menos 1,5.
 - Escala de espaçamento: 4, 8, 12, 16, 24, 32, 48, 64 e 96 px.
 - Conteúdo: largura máxima de 1240 px; margens de 20 px no celular, ampliadas progressivamente.
-- Fotografias: produto integrado ao hero por máscara SVG; bordas de papel e pequenas inclinações na galeria e no cardápio. Sem filtro que altere o alimento.
+- Fotografias: PNG transparente original no hero, com `object-fit: contain`; bordas de papel e pequenas inclinações na galeria e no cardápio. Sem filtro que altere o alimento.
 - Botões: área de toque de pelo menos 48 px, borda definida e contraste forte. Sem botões flutuantes cobrindo conteúdo.
 - Foco: contorno visível de alto contraste. Movimento: queda decorativa de fios no hero, com pausa voluntária, interrupção fora da tela e preferência de movimento reduzido; demais seções mantêm apenas estados de interação.
 
@@ -69,7 +69,7 @@ Paleta interpretada das cores recorrentes do perfil e do logo já existente; nã
 | Componente | Solução | Estados importantes |
 | --- | --- | --- |
 | Cabeçalho | Marca, três âncoras e Instagram | Menu móvel fechado/aberto, Escape, retorno de foco |
-| Hero | Frase da embalagem, produto recortado, fios caindo, sabores e localização | Imagem priorizada, SVG com nome acessível, ações visíveis e pausa dos fios |
+| Hero | Frase da embalagem, produto transparente com parallax, fios caindo, sabores e localização | Imagem priorizada com alt, ações visíveis, pausa dos fios e sensor após interação |
 | Cardápio | Seis elementos `details` com ingredientes | Primeiro aberto; abertura pelo toque e teclado; uso sem JS |
 | Galeria | Fotos/capas reais ligadas aos Reels originais | Links com nome acessível, rolagem horizontal interna no celular |
 | Localização | Foto do Farol, Maps, Waze e Instagram | Sem afirmar ponto ou horário exato não confirmado |
@@ -90,6 +90,7 @@ Evitar solicitar pedido ou pagamento se não existe fluxo real para isso. Não i
 - `index.html`: conteúdo, semântica, metadados e alternativas que continuam úteis sem JavaScript.
 - `styles.css`: tokens do sistema visual, base para 320 px e melhorias progressivas por largura.
 - `script.js`: comportamento do menu, ano do rodapé e WhatsApp opcional.
+- `hero-parallax.js`: efeito do copo por cursor/sensor, interpolação e fallback.
 - `assets/`: fotos, marca, fontes e mídia servidas localmente.
 - `SYSTEM DESIGN.MD`: decisões, fontes, etapas e evidências de validação.
 - `README.md`: instruções operacionais e manutenção da versão final.
@@ -119,7 +120,8 @@ As páginas e fontes da prévia 3D anterior não precisam ser apagadas para refa
 
 | Arquivo | Origem pública observada | Uso |
 | --- | --- | --- |
-| `assets/manga.webp` | https://www.instagram.com/mangou.salvador/p/Ddr6zo-EYwB/ | Hero; fotografia real já preservada no projeto |
+| `assets/manga.webp` | https://www.instagram.com/mangou.salvador/p/Ddr6zo-EYwB/ | Fotografia anterior preservada; prévia de compartilhamento |
+| `assets/copo-parallax.png` | PNG transparente enviado pelo usuário em 25/10/2026 | Copo do hero, arquivo original sem recompressão |
 | `assets/fios-manga.png` | PNG transparente enviado pelo usuário em 25/10/2026 | Três fios originais reaproveitados em sprites CSS |
 | `assets/papel-grain.svg` | Textura procedural local, inspirada na arte enviada pelo usuário | Granulado estático nos fundos e nas molduras |
 | `assets/role-barra.jpg` | https://www.instagram.com/mangou.salvador/reel/Dcg7NSwpMDw/ | Capa do Reel com duas pessoas na orla |
@@ -271,3 +273,26 @@ Validação local: cobertura do hero e ausência de transbordamento conferidas e
 Implementação e conferência local concluídas. `assets/papel-grain.svg`: 686 bytes, XML válido, bloco repetível de 160 × 160 px. Fundos verde, amarelo e papel e molduras usam a mesma textura; nenhuma camada é aplicada sobre as fotografias ou sobre o texto. Conferência visual em desktop e celular e leitura das propriedades calculadas confirmaram imagem e composição corretas. `node checks/site.mjs` passou, incluindo todos os novos ativos CSS; `git diff --check` sem erro. CSS e JS v26. Os testes foram feitos no navegador, sem aparelho físico.
 
 Publicação das seções 17 e 18 concluída: commit `c6745514b83cf5ae43dc484ee1da82ab3421d995`, GitHub Pages `40229935750` com `success`. URL: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=c674551. HTML, PNG e textura retornaram HTTP 200; CSS publicado idêntico ao commit. O SHA-256 do PNG remoto também corresponde ao original enviado. Navegador público em 390 px: 14 trilhas, queda em toda a área do hero, reprodução voluntária funcionando com movimento reduzido, textura correta e nenhum transbordamento. Evidências em `verificacao/mangou-redesign/hero-textura-fios.jpg` e `fios-larguras.json`, na pasta acima do repositório.
+
+## 19. Parallax interativo do copo
+
+25/10/2026 — Plano antes da implementação: integrar o PNG transparente `Copo de Manga Verde com Sal (1).png` enviado pelo usuário na área do produto existente, mantendo arquivo, proporção e resolução originais (1122 × 1402). Preservar textos, cores, grid, alturas reservadas, textura e chuva de fios. A fotografia anterior permanece no repositório.
+
+Implementar em JavaScript puro: cursor no desktop; `DeviceOrientation` no celular após botão explícito, com `requestPermission()` chamado dentro do clique quando exigido. Contexto seguro, erro/recusa/ausência de dados e API incompatível recebem fallback estático. Calibrar a posição inicial e recalibrar após mudança de orientação/retorno à tela. Não capturar nem transmitir dados de sensores.
+
+Profundidade: copo até 12 px e 5° por eixo, fios a 40% do deslocamento e textura ao fundo em sentido oposto, a 18%. Interpolação temporal em `requestAnimationFrame`, somente enquanto o alvo muda. Cancelar e neutralizar fora do hero, na aba oculta ou com `prefers-reduced-motion`. Movimento reduzido desativa o parallax inclusive quando o usuário reproduz a chuva de fios.
+
+Referências técnicas conferidas: [MDN DeviceOrientationEvent](https://developer.mozilla.org/en-US/docs/Web/API/DeviceOrientationEvent), [MDN requestPermission](https://developer.mozilla.org/en-US/docs/Web/API/DeviceOrientationEvent/requestPermission_static) e [W3C Device Orientation](https://www.w3.org/TR/orientation-event/). Permissão exige ativação do usuário quando o estado é prompt; APIs de orientação dependem de contexto seguro.
+
+| Etapa | Estado |
+| --- | --- |
+| Inspecionar estrutura, imagem e regras das APIs | Concluída |
+| Implementar parallax e controles de sensores | Concluída |
+| Testar limites, permissões, fallback e responsividade | Concluída |
+| Publicar e conferir a versão pública | Pendente |
+
+Implementação: `hero-parallax.js`, clássico e isolado; sem biblioteca. `perspective: 1100px` na área existente, transformações na camada interna e imagem com `object-fit: contain`. A textura e a camada dos fios movem-se separadamente. O botão de sensor aparece apenas em dispositivo de ponteiro grosso, com API/contexto compatível e sem movimento reduzido. Recusa, exceção ou ausência de dados por 3 segundos desativam o sensor com aviso acessível e fallback estático. Mudança de orientação ou retorno à área recalibra a posição. A primeira amostra válida define o neutro. O PNG tem 1.453.421 bytes; SHA-256 `8bc7ac5399847e550b64f050a73003e3d76e5d49bba9b63bc5ce4ec9a7c9f093`, idêntico ao arquivo enviado.
+
+Validação local: `node checks/site.mjs`, sintaxe dos dois scripts, 35 referências, ARIA/IDs e `git diff --check` passaram. `node checks/parallax.mjs`: 8 testes passaram, cobrindo cursor, interpolação temporal, limites, fim do RAF, toque ignorado, permissão somente após clique, calibração, paisagem, passagem por ±180°, Android sem `requestPermission`, recusa/erro/ausência de dados, aba/hero ocultos, recalibração e mudança de preferência durante pedido pendente. São eventos/API simulados em Node, sem acesso a sensores reais.
+
+Navegador: 320, 360, 390, 430, 600, 800, 959, 960, 1024, 1440 e 1885 px, sem transbordamento; imagem carregada na resolução original, `contain` e área reservada preservados. O navegador de conferência sinaliza movimento reduzido: o copo permanece neutro e o botão de sensor fica oculto, conforme solicitado. Cursor em modo normal e sensores foram validados no teste simulado; aprovação nativa de iOS, resposta física e desempenho em aparelhos reais ainda não foram conferidos. CSS/scripts v27.
