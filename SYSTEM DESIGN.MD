@@ -289,10 +289,12 @@ Referências técnicas conferidas: [MDN DeviceOrientationEvent](https://develope
 | Inspecionar estrutura, imagem e regras das APIs | Concluída |
 | Implementar parallax e controles de sensores | Concluída |
 | Testar limites, permissões, fallback e responsividade | Concluída |
-| Publicar e conferir a versão pública | Pendente |
+| Publicar e conferir a versão pública | Concluída |
 
 Implementação: `hero-parallax.js`, clássico e isolado; sem biblioteca. `perspective: 1100px` na área existente, transformações na camada interna e imagem com `object-fit: contain`. A textura e a camada dos fios movem-se separadamente. O botão de sensor aparece apenas em dispositivo de ponteiro grosso, com API/contexto compatível e sem movimento reduzido. Recusa, exceção ou ausência de dados por 3 segundos desativam o sensor com aviso acessível e fallback estático. Mudança de orientação ou retorno à área recalibra a posição. A primeira amostra válida define o neutro. O PNG tem 1.453.421 bytes; SHA-256 `8bc7ac5399847e550b64f050a73003e3d76e5d49bba9b63bc5ce4ec9a7c9f093`, idêntico ao arquivo enviado.
 
 Validação local: `node checks/site.mjs`, sintaxe dos dois scripts, 35 referências, ARIA/IDs e `git diff --check` passaram. `node checks/parallax.mjs`: 8 testes passaram, cobrindo cursor, interpolação temporal, limites, fim do RAF, toque ignorado, permissão somente após clique, calibração, paisagem, passagem por ±180°, Android sem `requestPermission`, recusa/erro/ausência de dados, aba/hero ocultos, recalibração e mudança de preferência durante pedido pendente. São eventos/API simulados em Node, sem acesso a sensores reais.
 
 Navegador: 320, 360, 390, 430, 600, 800, 959, 960, 1024, 1440 e 1885 px, sem transbordamento; imagem carregada na resolução original, `contain` e área reservada preservados. O navegador de conferência sinaliza movimento reduzido: o copo permanece neutro e o botão de sensor fica oculto, conforme solicitado. Cursor em modo normal e sensores foram validados no teste simulado; aprovação nativa de iOS, resposta física e desempenho em aparelhos reais ainda não foram conferidos. CSS/scripts v27.
+
+Publicação verificada: commit `4d4701ae77d686ba92ddf3d710fe5b5bd3ebcf55`; GitHub Pages `40231244609`, resultado `success`. URL: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=4d4701a. HTML, script novo e PNG retornaram HTTP 200; JavaScript remoto idêntico ao commit. PNG público com 1.453.421 bytes e mesmo SHA-256 do arquivo original. Navegador público: imagem correta, proporção preservada, sem transbordamento ou erro de console; fallback estático observado com movimento reduzido. Evidências em `verificacao/mangou-redesign/hero-parallax-publico.jpg` e `parallax-larguras.json`, na pasta acima do repositório.
