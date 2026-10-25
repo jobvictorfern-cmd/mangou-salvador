@@ -24,7 +24,7 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
 .skip-link:focus{top:12px}
 .top-note{display:flex;justify-content:center;gap:24px;padding:8px 20px;background:var(--green);color:var(--paper);font-size:10px;font-weight:650;letter-spacing:.04em}
 .top-note span:last-child{display:none}
-.site-header{position:sticky;top:0;z-index:30;border-bottom:1px solid var(--line);background:var(--paper)}
+.site-header{position:sticky;top:0;z-index:30;background:transparent}
 .header-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;min-height:72px}
 .brand{display:inline-flex;align-items:center;gap:8px}
 .brand img{width:40px;height:40px;border-radius:50%}
@@ -255,4 +255,4 @@ h2{font:850 clamp(39px,10vw,58px)/1.02 var(--display);letter-spacing:-.06em}
 }
 
 /* Papel impresso apenas nos fundos: a fotografia e a tipografia mantêm nitidez. */
-body,.top-note,.site-header,.hero,.flavors,.flavor[open],.social-photo,.location,.location-photo,.menu-photo{background-image:url('assets/papel-grain.svg');background-size:160px 160px;background-blend-mode:soft-light}
+body,.top-note,.hero,.flavors,.flavor[open],.social-photo,.location,.location-photo,.menu-photo{background-image:url('assets/papel-grain.svg');background-size:160px 160px;background-blend-mode:soft-light}

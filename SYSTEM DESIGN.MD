@@ -298,3 +298,9 @@ Validação local: `node checks/site.mjs`, sintaxe dos dois scripts, 35 referên
 Navegador: 320, 360, 390, 430, 600, 800, 959, 960, 1024, 1440 e 1885 px, sem transbordamento; imagem carregada na resolução original, `contain` e área reservada preservados. O navegador de conferência sinaliza movimento reduzido: o copo permanece neutro e o botão de sensor fica oculto, conforme solicitado. Cursor em modo normal e sensores foram validados no teste simulado; aprovação nativa de iOS, resposta física e desempenho em aparelhos reais ainda não foram conferidos. CSS/scripts v27.
 
 Publicação verificada: commit `4d4701ae77d686ba92ddf3d710fe5b5bd3ebcf55`; GitHub Pages `40231244609`, resultado `success`. URL: https://jobvictorfern-cmd.github.io/mangou-salvador/?v=4d4701a. HTML, script novo e PNG retornaram HTTP 200; JavaScript remoto idêntico ao commit. PNG público com 1.453.421 bytes e mesmo SHA-256 do arquivo original. Navegador público: imagem correta, proporção preservada, sem transbordamento ou erro de console; fallback estático observado com movimento reduzido. Evidências em `verificacao/mangou-redesign/hero-parallax-publico.jpg` e `parallax-larguras.json`, na pasta acima do repositório.
+
+## 20. Header transparente
+
+Plano: retirar a cor de fundo, a textura de papel e o divisor inferior do header sticky; manter sua altura, posição, navegação e comportamento responsivo. Assim, o conteúdo que passa atrás do header durante a rolagem fica visível sem alterar o grid do hero ou o menu.
+
+Implementação: `styles.css` deixa `.site-header` transparente e remove apenas esse elemento da aplicação de textura. Altura, `position: sticky`, links e menu permanecem intactos. `index.html` aponta para CSS v28 para invalidar o cache.
