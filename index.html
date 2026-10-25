@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#123c29">
   <meta name="description" content="Manga fresca, limão e tempero do seu jeito. Conheça os seis sabores da Mangou e encontre a gente na Barra, em Salvador.">
-  <meta property="og:title" content="Deu praia. Deu Mangou. — Mangou Salvador">
-  <meta property="og:description" content="Manga fresca, sabor que vicia. Escolha seu tempero e bora de Mangou na Barra.">
+  <meta property="og:title" content="Manga verde e sal? Lá ele! — Mangou Salvador">
+  <meta property="og:description" content="Manga fresca, limão e tempero do seu jeito. Da Barra para o seu rolê.">
   <meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
   <meta property="og:image" content="https://jobvictorfern-cmd.github.io/mangou-salvador/assets/manga.webp">
   <title>Mangou Salvador — Manga fresca, sabor que vicia</title>
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preload" href="assets/display-v2.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20">
+  <link rel="preload" href="assets/manga.webp" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=22">
   <script src="script.js?v=21" defer></script>
 </head>
 <body>
@@ -38,14 +39,16 @@
   <main id="principal">
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="container hero-layout">
-        <div class="hero-heading"><p class="eyebrow">Manga + tempero + resenha</p><h1 id="hero-title">Deu praia.<br>Deu <span>Mangou.</span></h1></div>
-        <figure class="hero-photo">
-          <div class="hero-photo-frame"><img src="assets/manga.webp" alt="Copo cheio de manga fresca da Mangou na mão, com folhas verdes ao fundo" width="1200" height="1600" fetchpriority="high" decoding="async"></div>
-          <figcaption><span>Manga fresca. Sabor que vicia.</span><svg aria-hidden="true" viewBox="0 0 80 80"><use href="#icon-sun"/></svg></figcaption>
-          <span class="photo-note" aria-hidden="true">O rolê agora<br>vem no copo.</span>
+        <div class="hero-heading"><p class="hero-intro">O que rima com</p><h1 id="hero-title"><span class="hero-question">Manga verde<br>e sal?</span><span class="hero-answer">Lá ele!</span></h1></div>
+        <figure class="hero-product">
+          <svg viewBox="280 460 920 1140" width="920" height="1140" role="img" aria-labelledby="hero-product-title" xmlns="http://www.w3.org/2000/svg">
+            <title id="hero-product-title">Fotografia original de um copo cheio de manga da Mangou, segurado na mão</title>
+            <defs><clipPath id="hero-product-mask"><path d="M527 519C449 516 391 556 373 617L362 649C349 656 345 674 351 689L374 699 379 716C356 714 340 728 341 753L346 785 350 830 355 872C346 899 339 936 345 970C349 1001 370 1027 397 1048C391 1067 388 1086 391 1108C397 1148 414 1184 438 1208C479 1245 521 1260 575 1280C645 1303 685 1331 737 1370L1010 1610 1230 1610 1230 1342C1159 1329 1099 1301 1040 1265C1004 1243 949 1225 909 1202C862 1175 830 1153 819 1113C810 1070 808 1020 797 976C789 938 780 904 765 869C748 828 728 793 716 757L713 710C711 701 700 696 687 696C674 697 665 705 658 716L660 679C678 672 685 653 674 641L655 627C636 554 586 524 527 519Z"/></clipPath></defs>
+            <image href="assets/manga.webp" width="1200" height="1600" clip-path="url(#hero-product-mask)"/>
+          </svg>
         </figure>
         <div class="hero-copy">
-          <p>Manga no ponto, limão e aquele tempero.<br>A pausa que seu passeio na Barra merece.</p>
+          <p>Manga fresca, limão e tempero do seu jeito.<br>Da Barra, pra ir com você.</p>
           <div class="hero-actions"><a class="button" href="#sabores">Escolher meu sabor <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a><a class="text-link" href="#onde">Onde encontrar <svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg></a></div>
           <p class="hero-location">Sábados e domingos na Barra <span>•</span> Salvador, Bahia</p>
         </div>

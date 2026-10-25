@@ -20,7 +20,7 @@ O [SYSTEM DESIGN.MD](<SYSTEM DESIGN.MD>) documenta escopo, fontes, tokens visuai
 - `assets/`: mídias e fontes locais.
 - `checks/site.mjs`: verificação de desenvolvimento, sem dependências.
 
-A composição usa papel claro, verde, amarelo, xadrez e fotos reais. A ação de sabores aparece antes da fotografia no celular. Não há botão flutuante, formulário, checkout, contadores, depoimentos fabricados ou rastreador novo.
+A composição usa papel claro, verde, amarelo, xadrez e fotos reais. O hero traz a brincadeira do rótulo e o copo integrado ao fundo verde. A ação de sabores aparece antes da fotografia no celular. Não há botão flutuante, formulário, checkout, contadores, depoimentos fabricados ou rastreador novo.
 
 ## Manutenção
 
@@ -32,7 +32,7 @@ O WhatsApp fica oculto enquanto `WHATSAPP_NUMBER` em `script.js` estiver vazio. 
 
 ## Fotografias e filme
 
-O hero usa `assets/manga.webp`, foto real já existente no projeto. Quatro novas capas públicas foram recolhidas da grade do Instagram: `role-barra.jpg`, `role-resenha.jpg`, `role-manga.jpg` e `role-preparo.jpg`. Fontes e usos estão no System Design; cada imagem da galeria abre sua publicação original.
+O hero usa `assets/manga.webp`, foto real já existente no projeto, com o copo e a mão recortados por `clipPath` SVG inline em `index.html`. O arquivo da fotografia permanece intacto. Ao trocar a foto, ajuste também essa máscara. Quatro novas capas públicas foram recolhidas da grade do Instagram: `role-barra.jpg`, `role-resenha.jpg`, `role-manga.jpg` e `role-preparo.jpg`. Fontes e usos estão no System Design; cada imagem da galeria abre sua publicação original.
 
 As publicações completas solicitaram login. Foram coletadas as capas públicas; os Reels completos não foram baixados. O filme local é o material anterior do projeto, independente desses Reels.
 

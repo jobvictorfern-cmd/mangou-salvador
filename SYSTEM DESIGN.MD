@@ -41,7 +41,7 @@ Cada etapa atualiza este documento antes da seguinte. Uma falha observada deve s
 
 Ponto de partida: marca de comida de rua da Barra, fresca e informal. Usar fotografia com contexto real, tipografia expressiva e poucos elementos visuais com função clara. Evitar blocos genéricos de vantagens, selos sem fundamento, ícones repetidos e efeitos decorativos contínuos que disputem atenção com o produto.
 
-Conceito: um cartaz de rua da Mangou levado para a web. Fundo de papel claro, tipografia verde grande, amarelo concentrado no cardápio, fotografias com enquadramento próprio e xadrez em faixas curtas. A direção substitui o fundo escuro fotográfico da versão anterior; preserva a identidade da marca sem copiar a composição de outro site.
+Conceito: um cartaz de rua da Mangou levado para a web. Papel claro nas áreas de leitura, amarelo no cardápio, fotografias com enquadramento próprio e xadrez em faixas curtas. Após o feedback registrado na seção 14, a abertura passou a usar verde sólido, letras claras/amarelas e o produto recortado; o restante da direção foi preservado.
 
 ### Tokens
 
@@ -60,16 +60,16 @@ Paleta interpretada das cores recorrentes do perfil e do logo já existente; nã
 - Corpo: DM Sans local, base 16 px e entrelinha de pelo menos 1,5.
 - Escala de espaçamento: 4, 8, 12, 16, 24, 32, 48, 64 e 96 px.
 - Conteúdo: largura máxima de 1240 px; margens de 20 px no celular, ampliadas progressivamente.
-- Fotografias: bordas de papel e pequenas inclinações em pontos específicos; sem filtro que altere o alimento.
+- Fotografias: produto integrado ao hero por máscara SVG; bordas de papel e pequenas inclinações na galeria e no cardápio. Sem filtro que altere o alimento.
 - Botões: área de toque de pelo menos 48 px, borda definida e contraste forte. Sem botões flutuantes cobrindo conteúdo.
-- Foco: contorno visível de alto contraste. Movimento: somente entrada curta e estados de interação; sem chuva de elementos ou animação contínua na LP reconstruída.
+- Foco: contorno visível de alto contraste. Movimento: somente estados de interação; sem chuva de elementos ou animação contínua na LP reconstruída.
 
 ### Componentes
 
 | Componente | Solução | Estados importantes |
 | --- | --- | --- |
 | Cabeçalho | Marca, três âncoras e Instagram | Menu móvel fechado/aberto, Escape, retorno de foco |
-| Hero | Título curto, foto real, sabores e localização | Imagem carregada; entrada desativada com movimento reduzido |
+| Hero | Frase da embalagem, produto recortado, sabores e localização | Imagem priorizada, SVG com nome acessível, ações visíveis |
 | Cardápio | Seis elementos `details` com ingredientes | Primeiro aberto; abertura pelo toque e teclado; uso sem JS |
 | Galeria | Fotos/capas reais ligadas aos Reels originais | Links com nome acessível, rolagem horizontal interna no celular |
 | Filme do produto | Abertura voluntária em `dialog`, com vídeo nativo | Abrir, reproduzir, pausar, fechar e devolver foco |
@@ -78,7 +78,7 @@ Paleta interpretada das cores recorrentes do perfil e do logo já existente; nã
 ## 5. Estrutura final para implementação
 
 1. Cabeçalho compacto: marca, navegação e acesso claro ao Instagram.
-2. Hero: “Deu praia. Deu Mangou.”, foto real do copo e ações “Escolher meu sabor” e “Onde encontrar”.
+2. Hero: “O que rima com / Manga verde e sal? / Lá ele!”, fotografia original recortada e ações “Escolher meu sabor” e “Onde encontrar”. A frase vem do rótulo visível na própria foto.
 3. Sabores: cardápio amarelo com seis opções, ingredientes em disclosure e acesso ao perfil para preços/disponibilidade.
 4. O rolê: três fotografias/capas reais, links para os Reels correspondentes e botão para o filme de produto existente.
 5. Localização e atendimento: “O encontro é na Barra.”, foto do Farol, rotas e confirmação de ponto/horário no Instagram.
@@ -205,3 +205,20 @@ Evidências locais: `verificacao/mangou-redesign/` na pasta de trabalho acima do
 - O arquivo MP4 continua sendo o ativo anterior, e a nova página permanece em HTML, CSS e JS, sem framework ou dependências novas de runtime.
 
 Todas as etapas previstas neste documento foram executadas. Permanecem os limites explicitados na seção 12: aparelhos físicos, auditoria completa de acessibilidade e resultados reais de conversão não foram verificados.
+
+## 14. Revisão do hero após feedback
+
+25/10/2026 — O usuário aprovou a LP, mas considerou o hero genérico. Escopo desta revisão: somente a abertura e seus metadados, preservando cardápio, galeria, localização e comportamentos já aprovados.
+
+Direção: trocar a composição de foto inclinada + marca-texto + selo por uma campanha da própria Mangou. Usar a brincadeira sobre manga verde e sal presente no rótulo fotografado, fundo verde, tipografia clara/amarela e a fotografia original integrada à composição. O produto não será redesenhado nem gerado novamente; o recorte será definido por uma máscara SVG na página, mantendo o arquivo fotográfico intacto.
+
+| Etapa da revisão | Estado |
+| --- | --- |
+| Registrar diagnóstico, referência e escopo | Concluída |
+| Compor o novo hero com os ativos existentes | Concluída |
+| Conferir recorte, celular, desktop e links | Concluída |
+| Publicar e conferir a versão pública | Pendente |
+
+Implementação: fundo verde sólido; pergunta em papel claro e resposta amarela; copo e mão recortados por `clipPath` SVG inline. `assets/manga.webp` permanece intacto e recebe preload prioritário. O SVG possui nome acessível via `title`. No celular, a ação de sabores aparece antes da fotografia; em desktop, texto e produto dividem a abertura. A foto não anima e não depende de JavaScript.
+
+Validação local desta revisão: `node checks/site.mjs` passou; `git diff --check` sem erro de whitespace. Larguras 320, 360, 390, 430, 600, 800, 959, 960, 1024, 1440 e 1885 px, com fontes carregadas: sem transbordamento horizontal e com o título dentro da largura útil. Ações com aproximadamente 52 px e 44 px de altura. Recorte conferido visualmente em celular, transição de desktop e tela ampla. A fotografia e o MP4 não foram modificados; `script.js` permanece igual ao da versão aprovada. Mantêm-se os limites de validação da seção 12.
