@@ -144,7 +144,7 @@ if (mangoRain) {
   syncMangoMotion();
 }
 
-// Vídeo original, sem redução de resolução ou taxa de quadros.
+// Controles do vídeo do hero e da fotografia alternativa.
 const videoHero = document.querySelector('#inicio');
 const heroVideo = document.querySelector('#hero-video');
 const videoButton = document.querySelector('#hero-preparo');
